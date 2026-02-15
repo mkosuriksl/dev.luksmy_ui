@@ -1,0 +1,102 @@
+<div class="container-fluid mt-4 d-flex justify-content-center">
+    <div class="col-md-6 login-form card">
+        <div class="auctionFormRight" style="margin-top: 0px;">
+            <h3 class="aucformTitle text-center">ADD RENTAL DATA</h3>
+            <form [formGroup]="updateForm" (ngSubmit)="updateSubmitForm()">
+                
+                <div class="form-group row mb-3">
+                    <label for="amountPerDay" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Amount PerDay</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="amountPerDay" required formControlName="amountPerDay">
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="amountper30days" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Amount per30days</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="amountper30days" formControlName="amountper30days">
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="isAvailRent" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">IsAvail Rent</label>
+                    <div class="col-md-8">
+                        <select class="form-control" name="isAvailRent" required formControlName="isAvailRent">
+                            <option value="">Select Yes/No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <label for="pickup" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Pickup</label>
+                    <div class="col-md-8">
+                        <select class="form-control" name="pickup" required formControlName="pickup">
+                            <option value="">Select Yes/No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="delivery" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Delivery</label>
+                    <div class="col-md-8">
+                        <select class="form-control" name="delivery" formControlName="delivery">
+                            <option value="">Select Yes/No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-10 offset-md-2 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary" style="width: 120px; background-color: #18aedf; color: white; font-size: 17px;">Update</button>&nbsp;&nbsp;
+                    <button type="cancel" class="btn btn-danger" style="width: 120px; background-color: red; color: white; font-size: 17px;">Cancel</button>
+                
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6 login-form card">
+        <div class="auctionFormRight" style="margin-top: 0px;">
+            <h3 class="aucformTitle text-center">RENTAL DATA</h3>
+            <form >
+
+                <div class="form-group row mb-3">
+                    <label for="amountPerDay" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Asset ID</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" readonly [value]="data.assetId">
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="amountPerDay" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Asset Sub Category</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" readonly [value]="data.assetSubCat">
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="amountPerDay" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Asset Category</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" readonly [value]="data.assetCat">
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="amountPerDay" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Location</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" readonly [value]="data.location">
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="amountPerDay" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Brand</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" readonly [value]="data.assetBrand">
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="amountPerDay" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Model</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" readonly [value]="data.assetModel">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

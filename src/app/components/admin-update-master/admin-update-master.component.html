@@ -1,0 +1,162 @@
+<div class="container mt-4">
+  <div class="card shadow-lg border-0">
+    <div class="card-header bg-warning text-dark fw-semibold">
+      <i class="bi bi-pencil-square me-2"></i> Edit Record
+    </div>
+
+    <div *ngIf="this.record" class="card-body">
+      <form [formGroup]="editForm" (ngSubmit)="updateRecord()">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">SKU ID</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="skuId"
+              [disabled]="true"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Material Category</label>
+            <select
+              class="form-select"
+              formControlName="materialCategory"
+              (change)="getmaterialSubCategory()"
+            >
+              <option [value]="this.record?.materialCategory" [selected]="true">
+                {{ this.record?.materialCategory }}
+              </option>
+              <option *ngFor="let mc of materialCategories" [ngValue]="mc">
+                {{ mc }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Material Sub Category</label>
+            <select
+              class="form-select"
+              formControlName="materialSubCategory"
+              (change)="getBrandData()"
+            >
+              <option
+                [value]="this.record?.materialSubCategory"
+                [selected]="true"
+              >
+                {{ this.record?.materialSubCategory }}
+              </option>
+              <option *ngFor="let msc of materialSubCategories" [ngValue]="msc">
+                {{ msc }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Brand</label>
+            <select class="form-select" formControlName="brand">
+              <option [value]="this.record?.brand" [selected]="true">
+                {{ this.record?.brand }}
+              </option>
+              <option *ngFor="let b of brands" [value]="b">{{ b }}</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Model No</label>
+            <input type="text" class="form-control" formControlName="modelNo" />
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Model Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="modelName"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Shape</label>
+            <input type="text" class="form-control" formControlName="shape" />
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Width</label>
+            <input type="text" class="form-control" formControlName="width" />
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Length</label>
+            <input type="text" class="form-control" formControlName="length" />
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Size</label>
+            <input type="text" class="form-control" formControlName="size" />
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Thickness</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="thickness"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Status</label>
+            <select class="form-select" formControlName="status">
+              <option value="">Select</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Updated By</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="updatedBy"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Updated Date</label>
+            <input
+              type="date"
+              class="form-control"
+              formControlName="updatedDate"
+            />
+          </div>
+        </div>
+
+        <div class="text-end mt-4">
+          <button type="submit" class="btn btn-success">
+            <i class="bi bi-check-circle me-1"></i> Update
+          </button>
+          <a routerLink="/list" class="btn btn-secondary ms-2">
+            <i class="bi bi-arrow-left me-1"></i> Back
+          </a>
+        </div>
+      </form>
+    </div>
+
+    <div
+      *ngIf="!this.record"
+      class="card-body text-center text-danger fw-semibold d-flex flex-column"
+    >
+      Please select the record.
+
+      <button
+        class="btn btn-outline-secondary my-3 d-flex justify-content-center"
+        [routerLink]="['/ms-dashboard/ms-show-master']"
+      >
+        Go to Stored Records
+        <mat-icon class="ms-2">arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

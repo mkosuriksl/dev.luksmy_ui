@@ -1,0 +1,148 @@
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-5">
+      <img src="assets/images/bu.png" class="img-fluid" alt="Your Image">
+      <div class="col-md-12 col-xs-12 col-sm-12 res3">
+<ul class="sellCarInfolist dotted-list">
+
+   <li>
+     <div>
+
+     </div>
+   </li>
+
+   <br>
+   <li>
+     <div >
+       <h2>We undertake Annual Maintainence of Apartments and commercials buildings and Appliances</h2>
+     </div>
+   </li>
+ </ul>
+            </div>
+    </div>
+    <div class="col-md-7 login-form card">
+            <div class="auctionFormRight" style="margin-top: 0px;">
+                <h3 class="aucformTitle text-center">Register Here For Your Home Services</h3>
+                <form [formGroup]="signupForm" (ngSubmit)="signupSubmit()">
+
+                    <!-- Email ID Field -->
+                    <div class="form-group row mb-3">
+                        <label for="emailId" class="col-md-3 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Email ID<span style="color: red">*</span></label>
+                        <div class="col-md-9 d-flex align-items-center">
+                            <input type="text" class="form-control" name="emailId" placeholder="Enter Your Email_Id" required formControlName="email">
+
+                          </div>
+
+                          <div class="text-danger mt-2 text-end" *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid">
+                            This is a required field.
+                          </div>
+                          <div class="text-danger mt-2 text-end" *ngIf="signupForm.get('email')?.errors?.['gmail']">
+                            Please enter a valid Gmail address.
+                          </div>
+
+
+
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="form-group row mb-3">
+                        <label for="password" class="col-md-3 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Password<span style="color: red">*</span></label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" name="password" placeholder="Enter Your Password" required formControlName="password">
+                        </div>
+                        <div class="text-danger mt-2 text-end" *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid">
+                          This is a required field.
+                        </div>
+                    </div>
+
+                     <!-- Name Field -->
+                     <div class="form-group row mb-3">
+                      <label for="name" class="col-md-3 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Name<span style="color: red">*</span></label>
+                      <div class="col-md-9">
+                          <input type="text" class="form-control" name="name" placeholder="Enter Your Name" required formControlName="name">
+                      </div>
+                      <div class="text-danger mt-2 text-end" *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.invalid">
+                        This is a required field.
+                      </div>
+                  </div>
+
+                  <!-- Mobile Number Field -->
+                  <div class="form-group row mb-3">
+                    <label for="mobileNo" class="col-md-3 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Mobile<span style="color: red">*</span></label>
+
+                    <div class="col-md-9 d-flex align-items-center">
+                        <input type="text" class="form-control" name="mobileNo" placeholder="Enter Your Mobile_No" pattern="[1-9]{1}[0-9]{9}" title="Enter 10-digit mobile number" maxlength="10" formControlName="mobile" required>
+                    </div>
+                    <div class="text-danger mt-2 text-end" *ngIf="signupForm.get('mobile')?.touched && signupForm.get('mobile')?.invalid">
+                      This is a required field.
+                    </div>
+                    <div class="text-danger mt-2 text-end" *ngIf="signupForm.get('mobile')?.errors?.['numeric']">
+                      Please enter a valid mobile number (numeric only).
+                    </div>
+
+                  </div>
+
+                    <!-- City Field -->
+
+                    <!-- <div class="form-group row mb-3">
+                      <label for="city" class="col-md-3 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">City</label>
+                      <div class="col-md-9">
+                          <input type="text" class="form-control" name="city" placeholder="Enter Your City" required formControlName="city">
+                      </div>
+                  </div> -->
+
+                    <!-- Location Field -->
+
+                    <!-- <div class="form-group row mb-3">
+                        <label for="pincodeNo" class="col-md-3 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Pincode</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="pincodeNo" placeholder="Enter Your Location" title="Enter 6-digit pincode number" maxlength="6" required formControlName="location" #placesRef="ngx-places" ngx-gp-autocomplete >
+                        </div>
+                    </div> -->
+
+
+
+
+
+                    <!-- State Field -->
+
+                    <!-- <div class="form-group row mb-3">
+                        <label for="state" class="col-md-3 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">State</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="state" placeholder="Enter Your State" required formControlName="state">
+                        </div>
+                    </div> -->
+
+                    <!-- District Field -->
+<!-- 
+                    <div class="form-group row mb-3">
+                        <label for="district" class="col-md-3 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">District</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="district" placeholder="Enter Your District" required formControlName="district">
+                        </div>
+                    </div> -->
+
+
+                    <!-- Terms and Conditions Checkbox -->
+                    <div class="form-group row mb-3">
+                        <div class="col-md-9 offset-md-2">
+                            <input type="checkbox" class="form-check-input" name="check_agree" id="check_agree"  (change)="onCheckboxChange($event)"  required value="y">
+                            <label class="form-check-label" for="check_agree">
+                                <a href="condtions.jsp" target="_blank" style="color: #18aedf; font-size: 16px;">I agree to the terms and conditions</a>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Register Button -->
+                    <div class="form-group row mb-3">
+                        <div class="col-md-10 offset-md-2 text-center">
+                            <button type="submit" class="btn btn-success" style="width: 120px;"  [disabled]="!isChecked">REGISTER</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </div>
+  </div>
+
+
+</div>

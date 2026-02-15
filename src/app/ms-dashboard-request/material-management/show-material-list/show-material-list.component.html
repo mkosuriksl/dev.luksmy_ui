@@ -1,0 +1,477 @@
+<div class="container-fluid py-2">
+  <div class="card shadow-lg border-0 rounded-3">
+    <div
+      class="card-header bg-primary text-white d-flex justify-content-between align-items-center rounded-top"
+    >
+      <h4 class="mb-0"><i class="fa fa-cubes me-2"></i> Show Materials</h4>
+      <button
+        type="button"
+        class="btn btn-sm btn-light text-primary d-flex align-items-center"
+        (click)="toggleFilter()"
+      >
+        <i class="fa fa-filter me-1"></i> Filters
+      </button>
+    </div>
+    <div
+      class="card-body border-start border-end border-primary"
+      *ngIf="showFilter"
+    >
+      <form
+        [formGroup]="filtersForm"
+        (ngSubmit)="getMaterials()"
+        class="row g-3 mb-3"
+      >
+        <div class="col-12 col-md-3">
+          <label class="form-label fw-semibold">Material Category</label>
+          <select
+            class="form-select shadow-sm"
+            formControlName="materialCategory"
+            (change)="onCategoryChange($event)"
+          >
+            <option value="">All Categories</option>
+            <option *ngFor="let cat of categories" [value]="cat.category">
+              {{ cat.category }}
+            </option>
+          </select>
+        </div>
+        <div class="col-12 col-md-3">
+          <label class="form-label fw-semibold">Material Subcategory</label>
+          <select
+            class="form-select rounded-3"
+            formControlName="materialSubCategory"
+            (change)="onSubCategoryChange($event)"
+          >
+            <option value="">Select Subcategory</option>
+            <option *ngFor="let sub of subCategories" [value]="sub">
+              {{ sub }}
+            </option>
+          </select>
+        </div>
+        <div class="col-12 col-md-3">
+          <label class="form-label fw-semibold">Brand</label>
+          <select class="form-select shadow-sm" formControlName="brand">
+            <option value="">Select Brand</option>
+            <option *ngFor="let b of brands" [value]="b">{{ b }}</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-3">
+          <label class="form-label fw-semibold">Model No</label>
+          <input
+            type="text"
+            class="form-control shadow-sm"
+            formControlName="modelNo"
+            placeholder="Enter Model Number"
+          />
+        </div>
+
+        <div class="col-12 col-md-4">
+          <label class="form-label fw-semibold">Model Name</label>
+          <input
+            type="text"
+            class="form-control shadow-sm"
+            formControlName="modelName"
+            placeholder="Enter Model Name"
+          />
+        </div>
+
+        <div class="col-12 col-md-4">
+          <label class="form-label fw-semibold">Shape</label>
+          <input
+            type="text"
+            class="form-control shadow-sm"
+            formControlName="shape"
+            placeholder="Enter Shape"
+          />
+        </div>
+
+        <div class="col-12 col-md-4 d-flex align-items-end">
+          <button class="btn btn-primary w-50" type="submit">Search</button>
+        </div>
+      </form>
+    </div>
+    <hr class="m-0" />
+    <div class="mt-3">
+      <div class="d-flex justify-content-center my-4" *ngIf="bool">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <ng-container *ngIf="!bool">
+        <div class="card border-0 shadow-sm rounded-3">
+          <div class="card-header bg-light border-0 py-3">
+            <h6 class="mb-0 fw-semibold text-primary">Material List</h6>
+          </div>
+
+          <div
+            class="table-responsive border-top"
+            style="max-height: 300px; overflow-y: auto"
+          >
+            <table class="table table-hover align-middle text-center mb-0">
+              <thead class="table-primary text-dark sticky-top shadow-sm">
+                <tr>
+                  <th>Model</th>
+                  <th>Name</th>
+                  <th>SKU</th>
+                  <th>Description</th>
+                  <th>Image</th>
+                  <th>Status</th>
+                  <th>Updated Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let mat of materials" class="align-middle">
+                  <td class="fw-semibold text-primary">{{ mat.modelNo }}</td>
+                  <td>{{ mat.modelName }}</td>
+                  <td class="text-truncate small" style="max-width: 130px">
+                    {{ mat.skuId }}
+                  </td>
+                  <td class="text-muted small">
+                    {{ mat.materialCategory }} {{ mat.materialSubCategory }}
+                    {{ mat.shape }} {{ mat.size }}
+                  </td>
+                  <!-- <td>
+                    <img
+                      [src]="
+                        mat.materialMasterImage1 || 'assets/images/no-image.png'
+                      "
+                      alt="Material Image"
+                      class="rounded border"
+                      style="width: 55px; height: 55px; object-fit: cover"
+                    />
+                  </td> -->
+                  <!-- <div
+                    class="d-grid"
+                    style="grid-template-columns: repeat(3, 60px); gap: 6px"
+                  >
+                    <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
+                      <img
+                        [src]="
+                          mat['materialMasterImage' + i] ||
+                          'assets/images/no-image.png'
+                        "
+                        alt="Material Image {{ i }}"
+                        class="border rounded shadow-sm"
+                        style="width: 60px; height: 60px; object-fit: cover"
+                      />
+                    </ng-container>
+                  </div> -->
+                  <td class="p-2">
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                      <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
+                        <img
+                          [src]="
+                            mat['materialMasterImage' + i] ||
+                            'assets/images/no-image.png'
+                          "
+                          alt="Material Image {{ i }}"
+                          class="border rounded shadow-sm"
+                          style="
+                            width: 30px;
+                            height: 30px;
+                            object-fit: cover;
+                            transition: transform 0.2s ease-in-out;
+                            cursor: pointer;
+                          "
+                          (mouseenter)="onImageHover($event, true)"
+                          (mouseleave)="onImageHover($event, false)"
+                        />
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <span
+                      class="badge rounded-pill px-3 py-2"
+                      [ngClass]="{
+                        'bg-success-subtle text-success border border-success':
+                          mat.status === 'Active',
+                        'bg-secondary-subtle text-secondary border border-secondary':
+                          mat.status !== 'Active'
+                      }"
+                    >
+                      {{ mat.status || "Inactive" }}
+                    </span>
+                  </td>
+
+                  <td class="small">
+                    {{ mat.updatedDate | date : "dd/MM/yyyy" }}
+                  </td>
+
+                  <td>
+                    <div
+                      class="d-flex justify-content-center align-items-center gap-2"
+                    >
+                      <button
+                        class="btn btn-light border btn-sm rounded-pill px-3 d-flex align-items-center shadow-sm"
+                        (click)="openUpdateModal(mat)"
+                        title="Edit Material"
+                      >
+                        <i class="fa fa-pen text-primary me-1"></i>
+                        Edit
+                      </button>
+
+                      <button
+                        class="btn btn-light border btn-sm rounded-pill px-3 d-flex align-items-center shadow-sm"
+                        (click)="openImageUploadModal(mat)"
+                        title="Update Image"
+                      >
+                        <i class="fa fa-image text-success me-1"></i>
+                        Image
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr *ngIf="materials.length === 0">
+                  <td colspan="8" class="text-muted py-3">No records found</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div
+            class="card-footer bg-light d-flex justify-content-between align-items-center py-2 px-3 border-0"
+          >
+            <p class="mb-0 small text-muted">
+              Showing <strong>{{ currentPage + 1 }}</strong> of
+              <strong>{{ totalPages }}</strong> pages
+            </p>
+            <nav>
+              <ul class="pagination pagination-sm mb-0">
+                <li class="page-item" [class.disabled]="currentPage === 0">
+                  <a class="page-link" (click)="changePage(currentPage - 1)"
+                    >Prev</a
+                  >
+                </li>
+
+                <li
+                  class="page-item"
+                  *ngFor="let p of [].constructor(totalPages); let i = index"
+                  [class.active]="i === currentPage"
+                >
+                  <a class="page-link" (click)="changePage(i)">{{ i + 1 }}</a>
+                </li>
+
+                <li
+                  class="page-item"
+                  [class.disabled]="currentPage + 1 >= totalPages"
+                >
+                  <a class="page-link" (click)="changePage(currentPage + 1)"
+                    >Next</a
+                  >
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div
+      *ngIf="isUpdateModalOpen"
+      class="modal fade show d-block"
+      tabindex="-1"
+      aria-labelledby="updateMaterialLabel"
+      aria-modal="true"
+      role="dialog"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg border-0 rounded-4">
+          <div class="modal-header bg-primary text-white rounded-top-4">
+            <h5 class="modal-title fw-semibold mb-0" id="updateMaterialLabel">
+              <i class="bi bi-pencil-square me-2"></i> Update Material
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              aria-label="Close"
+              (click)="isUpdateModalOpen = false"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form
+              [formGroup]="updateForm"
+              (ngSubmit)="onUpdateSubmit()"
+              class="row g-3"
+            >
+              <input type="hidden" formControlName="skuId" />
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Model Name</label>
+                <input
+                  type="text"
+                  class="form-control rounded-3"
+                  formControlName="modelName"
+                  placeholder="Enter Model Name"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Model Number</label>
+                <input
+                  type="text"
+                  class="form-control rounded-3"
+                  formControlName="modelNo"
+                  placeholder="Enter Model Number"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Shape</label>
+                <input
+                  type="text"
+                  class="form-control rounded-3"
+                  formControlName="shape"
+                  placeholder="Enter Shape"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Size</label>
+                <input
+                  type="text"
+                  class="form-control rounded-3"
+                  formControlName="size"
+                  placeholder="Enter Size"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Width (mm)</label>
+                <input
+                  type="number"
+                  class="form-control rounded-3"
+                  formControlName="width"
+                  placeholder="Enter Width"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Length (cm)</label>
+                <input
+                  type="number"
+                  class="form-control rounded-3"
+                  formControlName="length"
+                  placeholder="Enter Length"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Thickness</label>
+                <input
+                  type="text"
+                  class="form-control rounded-3"
+                  formControlName="thickness"
+                  placeholder="Enter Thickness"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Status</label>
+                <select class="form-select rounded-3" formControlName="status">
+                  <option value="" disabled>Select Status</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+              </div>
+              <div class="col-12 text-end mt-4">
+                <button
+                  type="submit"
+                  class="btn btn-success px-4 me-2 rounded-3"
+                >
+                  <i class="bi bi-check-circle me-1"></i> Update
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary px-4 rounded-3"
+                  (click)="isUpdateModalOpen = false"
+                >
+                  <i class="bi bi-x-circle me-1"></i> Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade show d-block" *ngIf="isImageUploadModalOpen">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4 p-3 bg-light">
+          <div class="modal-header border-bottom-0">
+            <h5 class="modal-title text-primary fw-bold">
+              Upload Images for SKU: {{ selectedMaterial?.skuId }}
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              (click)="closeImageUploadModal()"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div
+                class="col-md-4"
+                *ngFor="let img of imagePreviews; let i = index"
+              >
+                <div
+                  class="card border-light shadow-sm h-100 position-relative"
+                  [ngClass]="{ 'border-primary': imagePreviews[i] }"
+                  (dragover)="onDragOver($event)"
+                  (drop)="onDrop($event, i)"
+                  style="cursor: pointer"
+                  title="Click or drag & drop image here"
+                >
+                  <div class="card-body d-flex flex-column align-items-center">
+                    <label class="form-label fw-semibold mb-2"
+                      >Image {{ i + 1 }}</label
+                    >
+                    <input
+                      type="file"
+                      accept="image/*"
+                      (change)="onFileSelected($event, i)"
+                      class="d-none"
+                      #fileInput
+                    />
+                    <div
+                      class="preview-container w-100 d-flex justify-content-center align-items-center bg-light border rounded"
+                      style="height: 120px; overflow: hidden"
+                      (click)="fileInput.click()"
+                    >
+                      <img
+                        *ngIf="imagePreviews[i]"
+                        [src]="imagePreviews[i]"
+                        alt="Preview"
+                        class="img-fluid"
+                        style="object-fit: contain; max-height: 100%"
+                      />
+                      <span
+                        *ngIf="!imagePreviews[i]"
+                        class="text-muted small text-center"
+                        >Click or drag image here</span
+                      >
+                    </div>
+                    <button
+                      *ngIf="imagePreviews[i]"
+                      class="btn btn-sm btn-outline-danger mt-2"
+                      (click)="removeImage(i)"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-top-0 justify-content-end">
+            <button
+              class="btn btn-outline-secondary rounded-pill px-4"
+              (click)="closeImageUploadModal()"
+            >
+              Cancel
+            </button>
+            <button
+              class="btn btn-primary rounded-pill px-4"
+              [disabled]="!hasFiles()"
+              (click)="uploadImages()"
+            >
+              Upload Images
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

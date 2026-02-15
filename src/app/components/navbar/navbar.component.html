@@ -1,0 +1,113 @@
+<nav  class="navbar navbar-expand-lg navbar-light bg-light header shadow" 
+[ngClass]="isLoggedIn ? 'header-logged-in' : 'header-default'">
+  <div class="container-fluid ">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/home">
+      <img
+        src="assets/images/logo2.jpg"
+        width="180"
+        height="40"
+        alt="Company Logo"
+      />
+    </a>
+
+    <span
+  class="brand-text collapse navbar-collapse pt-2"
+  *ngIf="!isLoggedIn"
+>
+  All Service Engineers join with us!
+</span>
+
+
+    <div class="additional-links" *ngIf="!isLoggedIn">
+    </div>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" *ngIf="isLoggedIn && userType === 'ADMIN'">
+          <a class="nav-link" routerLink="/dashboard"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn && userType === 'EC'">
+          <a class="nav-link" routerLink="/ec-dashboard"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn && userType === 'MS'">
+          <a class="nav-link" routerLink="/ms-dashboard"><i class="fas fa-tachometer-alt">&nbsp;</i>Dashboard</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn && userType === 'SP'">
+          <a class="nav-link" routerLink="/sp-dashboard"><i class="fas fa-tachometer-alt">&nbsp;</i>Dashboard</a>
+        </li>
+        <li class="nav-item " *ngIf="!isLoggedIn">
+          <a class="nav-link" href="https://mekanik-apk.s3.ap-south-1.amazonaws.com/app-makanik.apk">Download Mobile App</a>
+        </li>
+
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <div>
+            <p class="nav-link">Welcome <i class="fas fa-user"></i>&nbsp;{{ userName }}</p>
+          </div>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle ddcol"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Login
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" routerLink="/login">Customer login </a>
+              <!-- <a class="dropdown-item" routerLink="/sp-login">Service Person</a> -->
+              <a class="dropdown-item" routerLink="/ms-login">Material Supplier </a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle ddcol"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Register
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" routerLink="/register">Customer</a>
+              <!-- <a class="dropdown-item" routerLink="/sp-register"> -->
+                Service Person
+              </a>
+              <a class="dropdown-item" routerLink="/sp-supplier">
+                Material Supplier
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" routerLink="#" (click)="scrollDown()"
+            ><i class="fas fa-phone"></i>&nbsp;Contact us</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" (click)="logout()"><i class="fas fa-sign-out-alt">&nbsp;</i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+ 

@@ -1,0 +1,134 @@
+<div class="container mt-4 d-flex justify-content-center">
+  <div class="col-md-7 login-form card">
+    <div class="auctionFormRight" style="margin-top: 0px">
+      <h3 class="aucformTitle text-center">Add Service Name</h3>
+      <form
+        [formGroup]="addServiceNameForm"
+        (ngSubmit)="addServiceNameSubmit()"
+      >
+        <!-- Service Category Field -->
+        <div class="form-group row mb-3">
+          <label
+            for="serviceId"
+            class="col-md-2 control-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif"
+          >Service Category</label>
+          <div class="col-md-10">
+            <select
+              class="form-control"
+              name="serviceId"
+              required
+              placeholder="Select Service Id"
+              formControlName="serviceId"
+              (change)="onServiceCategoryChange()"
+            >
+              <option value="" disabled selected>Select Service Category</option>
+              <option *ngFor="let category of serviceCategories" [value]="category">
+                {{ category }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+         <!-- Assets Sub-Category -->
+         <!-- <div class="form-group row mb-3">
+          <label
+            for="SubCategory"
+            class="col-md-2 control-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif"
+            >Sub-Category</label
+          >
+          <div class="col-md-10">
+            <input
+              type="text"
+              class="form-control"
+              name="subCategory"
+              placeholder="Enter Sub-Category"
+              required
+              formControlName="subCategory"
+            />
+          </div>
+        </div> -->
+
+        <div class="form-group row mb-3">
+          <label
+            for="subCategory"
+            class="col-md-2 control-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif"
+          >Sub-Category</label>
+          <div class="col-md-10">
+            <select
+              class="form-control"
+              name="subCategory"
+              required
+              placeholder="Select Sub-Category"
+              formControlName="subCategory"
+            >
+              <option value="" disabled selected>Select Sub-Category</option>
+              <option *ngFor="let subCategory of serviceSubCategories" [value]="subCategory">
+                {{ subCategory }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Service Id -->
+         <div class="form-group row mb-3">
+          <label
+            for="serviceId"
+            class="col-md-2 control-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif"
+            >Service Id</label
+          >
+          <div class="col-md-10">
+            <input
+              type="text"
+              class="form-control"
+              name="serviceId"
+              placeholder="Enter Service Id"
+              required
+              formControlName="serviceId"
+            />
+          </div>
+        </div>
+
+        <!-- Service Name -->
+        <div class="form-group row mb-3">
+          <label
+            for="servicename"
+            class="col-md-2 control-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif"
+            >Service Name</label
+          >
+          <div class="col-md-10">
+            <input
+              type="text"
+              class="form-control"
+              name="serviceName"
+              placeholder="Enter service Name"
+              required
+              formControlName="serviceName"
+            />
+          </div>
+        </div>
+
+
+
+        <div class="col-md-10 offset-md-2 d-flex justify-content-center">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="
+              width: 120px;
+              background-color: #18aedf;
+              color: white;
+              font-size: 17px;
+            "
+          >
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

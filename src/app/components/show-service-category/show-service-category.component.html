@@ -1,0 +1,116 @@
+
+
+<div class="container main-container">
+  <div class="card card-container">
+      <div class="card-header">
+          <h1>Show Service Categories Data</h1>
+      </div>
+      <div class="card-body border-right-primary border-left-primary">
+        <form [formGroup]="addServiceForm">
+          <div class="row">
+            <div class="col-md-3 form-group">
+              <label  style="color: blue" for="subCategory">Service Category</label>
+              <!-- <input
+               placeholder="civil"
+                id="serviceCategory"
+                name="serviceCategory"
+                class="form-control"
+                formControlName="serviceCategory"
+              /> -->
+              <select
+              
+              class="form-control"
+              id="serviceCategory"
+              formControlName="serviceCategory"
+              (change)="onDropDownChange1($event)"
+            >
+            <option
+               disabled
+                value=""
+              >
+                ALL
+              </option>
+              <option
+                *ngFor="let category of serviceName"
+                [value]="category"
+              >
+                {{ category }}
+              </option>
+            </select>
+            </div>
+            <div class="col-md-3 form-group">
+              <label  style="color: blue" for="subCategory">Service subCategory</label>
+             
+              <select
+              
+              class="form-control"
+              id="serviceSubCategory"
+              formControlName="serviceSubCategory"
+            >
+            <option
+               disabled
+                value=""
+              >
+                ALL
+              </option>
+              <option
+                *ngFor="let category of serviceCategories"
+                [value]="category"
+              >
+                {{ category }}
+              </option>
+            </select>
+            </div>
+          </div>
+          <div class="form-row mt-3">
+            <div class="col-md-12 text-center">
+              <button type="submit" class="btn btn-primary" (click)="search()">
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+   <!-- table -->
+   <div class="table-container">
+
+  <table class="table table-bordered table-striped mt-3">
+    <div class="d-flex justify-content-center" *ngIf="bool">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+   <thead>
+    <tr>
+       <th scope="col">Srl._No.</th>
+       <th scope="col">Category</th>
+       <th scope="col">Sub-Category</th>
+       <th scope="col">Addedby</th>
+       <th scope="col">Edit</th>
+    </tr>
+   </thead>
+<tbody>
+
+<tr *ngFor="let item of serviceCategoryData | paginate: {itemsPerPage:20,currentPage:page,totalItems:totalLength}; let i = index">
+
+  <td>{{ i + 1 + (page - 1) * itemsPerPage }}</td>
+  <td>{{ item.serviceCategory}}</td>
+  <td>{{ item.serviceSubCategory}}</td>
+  <td>{{ item.addedBy }}</td>
+  <td>
+    <button class="btn btn-primary" (click)="editServiceCategory(item.id)">Edit</button>
+  </td>
+
+</tr>
+</tbody>
+
+      </table>
+
+      <div class="pagination">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+
+   </div>
+</div>
+

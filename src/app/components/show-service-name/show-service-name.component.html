@@ -1,0 +1,142 @@
+<div class="container main-container">
+  <div class="card card-container">
+    <div class="card-header">
+      <h1>Service Names</h1>
+    </div>
+    <div class="card-body border-right-primary border-left-primary">
+      <form [formGroup]="addServiceForm">
+        <div class="row">
+          <div class="col-md-3 form-group">
+            <label  style="color: blue" for="subCategory">Service Category</label>
+           
+            <select
+            class="form-control"
+            id="service-category"
+            (change)="onDropDownChange1($event)"
+            formControlName="category"
+          >
+          <option
+          disabled
+           value=""
+         >
+           ALL
+         </option>
+            <option
+              *ngFor="let category of categories"
+              [value]="category"
+            >
+              {{ category }}
+            </option>
+          </select>
+          </div>
+          <div class="col-md-3 form-group">
+            <label  style="color: blue" for="subCategory">Service Sub Category</label>
+            <select
+              class="form-control"
+              id="subCategory"
+              formControlName="subCategory"
+            >
+            <option
+            disabled
+             value=""
+           >
+             ALL
+           </option>
+              <option
+                *ngFor="let category of serviceCategories"
+                [value]="category"
+              >
+                {{ category }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3 form-group">
+            <label  style="color: blue" for="subCategory" >Service Name</label>
+            <input
+            placeholder="ALL"
+              id="serviceName"
+              name="serviceName"
+              class="form-control"
+              formControlName="serviceName"
+            />
+          </div>
+          <div class="col-md-3 form-group">
+            <label  style="color: blue" for="subCategory">Service Id</label>
+            <input
+            placeholder="ALL"
+              id="serviceId"
+              name="serviceId"
+              class="form-control"
+              formControlName="serviceId"
+            />
+          </div>
+        </div>
+        <div class="form-row mt-3">
+          <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-primary" (click)="search()">
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+ 
+
+  <!-- table -->
+  <div class="table-container">
+    <table class="table table-bordered table-striped mt-3">
+      <div class="d-flex justify-content-center" *ngIf="bool">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <thead>
+        <tr>
+          <th scope="col">Srl._No.</th>
+          <th scope="col">Service Id</th>
+          <th scope="col">Service Name</th>
+          <th scope="col">Added By</th>
+          <th scope="col">Added Date</th>
+          <th scope="col">Service Subcategory</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Add table data here -->
+        <!-- Add table data here -->
+        <tr
+          *ngFor="
+            let item of tableData
+              | paginate
+                : {
+                    itemsPerPage: 20,
+                    currentPage: page,
+                    totalItems: totalLength
+                  };
+            let i = index
+          "
+        >
+          <td>{{ i + 1 + (page - 1) * itemsPerPage }}</td>
+          <td>{{ item.serviceId }}</td>
+          <td>{{ item.serviceName }}</td>
+          <td>{{ item.addedBy }}</td>
+          <td>{{ item.addedDate }}</td>
+          <td>{{ item.serviceSubCategory }}</td>
+
+          <td>
+            <button
+              class="btn btn-sm btn-primary"
+              (click)="openEditDialog(item)"
+            >
+              Edit
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div>
+</div>

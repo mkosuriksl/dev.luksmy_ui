@@ -1,0 +1,51 @@
+
+
+.custom-bg {
+  background-color: #18aedf;
+}
+
+
+.min-height-container {
+  min-height: 400px; /* Adjust the height as needed */
+}
+
+
+.card {
+  margin-bottom: 20px;
+}
+
+/* Style for the card header */
+.card-header {
+  background-color: #18aedf; /* Your custom background color */
+  color: #fff; /* Text color */
+}
+
+/* Style for the icon in the card header */
+.card-header i {
+  font-size: 36px;
+}
+
+/* Style for the details section */
+.card-details {
+  padding: 20px;
+}
+
+/* Style for Asset ID details */
+.asset-details {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Style for specific details like Sub-Category, District, etc. */
+.asset-details span {
+  font-weight: bold;
+  margin-right: 10px;
+  display: inline-block;
+  width: 120px; /* Adjust the width as needed */
+}
+
+/* Add more specific styles if needed based on your design requirements */
+.container{
+  position: relative;
+  top:30px;
+}

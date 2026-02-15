@@ -1,0 +1,503 @@
+<div class="container-fluid py-2">
+  <div class="card shadow-sm">
+    <div
+      class="card-header bg-primary text-white d-flex justify-content-between align-items-center"
+    >
+      <h4 class="mb-0">Material Request</h4>
+      <i
+        class="fa fa-filter filter-toggle-icon"
+        (click)="toggleFilter()"
+        title="Toggle Filters"
+      ></i>
+    </div>
+    <div
+      class="card-body border-start border-end border-primary"
+      *ngIf="showFilter"
+    >
+   <form
+  [formGroup]="materialRequestForm"
+  (ngSubmit)="search()"
+  class="p-3 rounded-3"
+  style="background: #f1f3f5"
+>
+  <div class="row g-3">
+    <!-- Material Category -->
+    <div class="col-12 col-md-3">
+      <label class="form-label fw-medium text-primary">Material Category</label>
+      <select
+        class="form-select rounded-3"
+        formControlName="materialCategory"
+        (change)="onCategoryChange($event)"
+      >
+        <option value="">All Category</option>
+        <option *ngFor="let cat of categories" [value]="cat.category">
+          {{ cat.category }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Material Subcategory -->
+    <div class="col-12 col-md-3">
+      <label class="form-label fw-medium text-primary">
+        Material Subcategory
+      </label>
+      <select
+        class="form-select rounded-3"
+        formControlName="materialSubCategory"
+        (change)="onSubCategoryChange($event)"
+      >
+        <option value="">Select Subcategory</option>
+        <option *ngFor="let sub of subCategories" [value]="sub">
+          {{ sub }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Brand -->
+    <div class="col-12 col-md-3">
+      <label class="form-label fw-medium text-primary">Brand</label>
+      <select class="form-select rounded-3" formControlName="brand">
+        <option value="">Select Brand</option>
+        <option *ngFor="let b of brands" [value]="b">{{ b }}</option>
+      </select>
+    </div>
+
+    <!-- Order ID -->
+    <div class="col-12 col-md-3">
+      <label class="form-label text-primary">Order ID</label>
+      <input
+        type="text"
+        class="form-control rounded-3"
+        formControlName="orderId"
+        placeholder="Enter Order ID"
+      />
+    </div>
+
+    <!-- Customer Email -->
+    <div class="col-12 col-md-3">
+      <label class="form-label text-primary">Customer Email</label>
+      <input
+        type="email"
+        class="form-control rounded-3"
+        formControlName="customerEmail"
+        placeholder="Enter Customer Email"
+      />
+    </div>
+
+    <!-- Customer Number -->
+    <div class="col-12 col-md-3">
+      <label class="form-label text-primary">Customer Number</label>
+      <input
+        type="text"
+        class="form-control rounded-3"
+        formControlName="customerNumber"
+        placeholder="Enter Customer Number"
+      />
+    </div>
+
+    <!-- From Date -->
+    <div class="col-12 col-md-3">
+      <label class="form-label text-primary">From Date</label>
+      <input
+        type="date"
+        class="form-control rounded-3"
+        formControlName="fromDate"
+      />
+    </div>
+
+    <!-- To Date -->
+    <div class="col-12 col-md-3">
+      <label class="form-label text-primary">To Date</label>
+      <input
+        type="date"
+        class="form-control rounded-3"
+        formControlName="toDate"
+      />
+    </div>
+
+    <!-- Order Status -->
+    <div class="col-12 col-md-3">
+      <label class="form-label text-primary">Order Status</label>
+      <select class="form-select rounded-3" formControlName="status">
+        <option value="">Select Order Status</option>
+        <option value="NEW">NEW</option>
+        <option value="PENDING">PENDING</option>
+        <option value="PROCESSING">PROCESSING</option>
+        <option value="SHIPPED">SHIPPED</option>
+        <option value="DELIVERED">DELIVERED</option>
+        <option value="CANCELLED">CANCELLED</option>
+        <option value="COMPLETED">COMPLETED</option>
+      </select>
+    </div>
+
+    <!-- Delivery Location -->
+    <div class="col-12 col-md-3">
+      <label class="form-label text-primary">Delivery Location</label>
+      <input
+        type="text"
+        class="form-control rounded-3"
+        formControlName="deliveryLocation"
+        placeholder="Enter Delivery Location"
+      />
+    </div>
+
+    <!-- Search Button -->
+    <div class="col-12 d-flex justify-content-end pt-2">
+      <button
+        type="submit"
+        class="btn btn-primary px-5 fw-semibold rounded-pill"
+      >
+        Search
+      </button>
+    </div>
+  </div>
+</form>
+
+    </div>
+  </div>
+  <hr class="m-0" />
+  <div class="mt-3">
+    <div class="d-flex justify-content-center" *ngIf="bool">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <ng-container *ngIf="!bool && tableData.length > 0; else noDataTemplate">
+      <div class="table-responsive" style="max-height: 250px; overflow-y: auto">
+        <table
+          class="table table-bordered table-striped table-hover align-middle text-center mb-0"
+        >
+          <thead class="table-dark sticky-top shadow-sm">
+            <tr>
+              <th>Request ID</th>
+              <th>Customer Name</th>
+              <th>Customer Email</th>
+              <th>Customer Mobile</th>
+              <th>Delivery Location</th>
+              <th>Status</th>
+              <th>Total Quantity</th>
+              <th>Created Date</th>
+              <th>Updated Date</th>
+              <th *ngIf="userType !== 'ADMIN'">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of pagedData">
+              <td>
+                <button
+                  class="btn btn-link p-0"
+                  (click)="openDetailsModalview(item)"
+                >
+                  {{ item.materialRequestId }}
+                </button>
+              </td>
+              <td>{{ item.customerName }}</td>
+              <td>{{ item.customerEmail }}</td>
+              <td>{{ item.customerMobile }}</td>
+              <td>{{ item.deliveryLocation }}</td>
+              <td>{{ item.orderStatus }}</td>
+              <td>{{ item.totalQty }}</td>
+              <td>{{ item.createdDate | date : "dd/MM/yyyy" }}</td>
+              <td>{{ item.updatedDate | date : "dd/MM/yyyy" }}</td>
+              <td *ngIf="userType !== 'ADMIN'">
+                <button
+                  class="btn btn-success btn-sm"
+                  (click)="openDetailsModal(item, true)"
+                >
+                  Quote
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="d-md-none">
+        <div *ngFor="let item of pagedData" class="card mb-3 shadow-sm">
+          <div class="card-body">
+            <h6 class="card-title mb-2">
+              Request ID:
+              <button
+                class="btn btn-link p-0"
+                (click)="openDetailsModalview(item)"
+              >
+                {{ item.materialRequestId }}
+              </button>
+            </h6>
+            <p class="mb-1">
+              <strong>Customer:</strong> {{ item.customerName }}
+            </p>
+            <p class="mb-1"><strong>Email:</strong> {{ item.customerEmail }}</p>
+            <p class="mb-1">
+              <strong>Mobile:</strong> {{ item.customerMobile }}
+            </p>
+            <p class="mb-1">
+              <strong>Delivery Location:</strong> {{ item.deliveryLocation }}
+            </p>
+            <p class="mb-1">
+              <strong>Total Quantity:</strong> {{ item.totalQty }}
+            </p>
+            <p class="mb-1">
+              <strong>Created:</strong>
+              {{ item.createdDate | date : "dd/MM/yyyy" }}
+            </p>
+            <p class="mb-1">
+              <strong>Updated:</strong>
+              {{ item.updatedDate | date : "dd/MM/yyyy" }}
+            </p>
+            <div *ngIf="userType !== 'ADMIN'" class="mt-2">
+              <button
+                class="btn btn-success btn-sm"
+                (click)="openDetailsModal(item, true)"
+              >
+                Quote
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #noDataTemplate>
+      <div class="text-center mt-3 text-muted">No material requests found.</div>
+    </ng-template>
+
+    <div *ngIf="tableData.length > 0" class="container-fluid mt-3">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-4 d-flex align-items-center mb-2 mb-md-0">
+          <label for="recordsPerPage" class="me-2 fw-semibold"
+            >Items Per Page:</label
+          >
+          <select
+            id="recordsPerPage"
+            class="form-select form-select-sm w-auto"
+            (change)="onRecordsPerPageChange($event)"
+          >
+            <option value="5" [selected]="itemsPerPage === 5">5</option>
+            <option value="10" [selected]="itemsPerPage === 10">10</option>
+            <option value="15" [selected]="itemsPerPage === 15">15</option>
+            <option value="20" [selected]="itemsPerPage === 20">20</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-4 d-flex justify-content-center mb-2 mb-md-0">
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item" [class.disabled]="page === 1">
+              <a class="page-link" (click)="onPageChange(page - 1)">Prev</a>
+            </li>
+
+            <li
+              class="page-item"
+              *ngFor="let p of [].constructor(totalPages); let i = index"
+              [class.active]="i + 1 === page"
+            >
+              <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+            </li>
+
+            <li class="page-item" [class.disabled]="page >= totalPages">
+              <a class="page-link" (click)="onPageChange(page + 1)">Next</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-4 text-md-end text-start">
+          <p class="text-muted mb-0">
+            <strong>Total:</strong> {{ totalLength }} records
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade show d-block"
+    tabindex="-1"
+    *ngIf="isModalOpen"
+    style="background: rgba(0, 0, 0, 0.5)"
+  >
+    <div
+      class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable"
+    >
+      <div class="modal-content">
+        <div
+          class="modal-header border-bottom-0 justify-content-between align-items-center"
+        >
+          <h5
+            class="modal-title text-center text-dark fw-semibold w-100"
+            style="font-size: 1.25rem"
+          >
+            Material Request Details
+            <small class="d-block text-muted" style="font-size: 0.875rem">
+              Request ID: {{ selectedRequestId }}
+            </small>
+          </h5>
+
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="closeModal()"
+          ></button>
+        </div>
+        <div class="modal-body p-2">
+          <div class="table-responsive">
+            <table
+              class="table table-bordered table-striped table-hover align-middle text-center mb-0"
+            >
+              <thead class="table-light text-uppercase small">
+                <tr>
+                  <th *ngIf="isEditableMode" style="width: 40px"></th>
+                  <th>Material Category</th>
+                  <th>Brand</th>
+                  <th>Item Name</th>
+                  <th>Item Size</th>
+                  <th>Quantity</th>
+                  <th>Order Date</th>
+                  <th>Updated Date</th>
+                  <th>Status</th>
+                  <th>Quoted Amount</th>
+                  <th>MRP</th>
+                  <th>Discount</th>
+                  <th>GST</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let detail of selectedRequestDetails"
+                  class="align-middle"
+                >
+                  <td *ngIf="isEditableMode">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      [(ngModel)]="detail.isSelected"
+                      (change)="calculateTotal()"
+                    />
+                  </td>
+
+                  <td class="fw-semibold">
+                    {{ detail.materialCategory ?? "-" }}
+                  </td>
+                  <td>{{ detail.brand ?? "-" }}</td>
+                  <td>{{ detail.itemName ?? "-" }}</td>
+                  <td>{{ detail.itemSize ?? "-" }}</td>
+                  <td>{{ detail.qty ?? 0 }}</td>
+
+                  <td>
+                    {{
+                      detail.orderDate
+                        ? (detail.orderDate | date : "dd/MM/yyyy")
+                        : "-"
+                    }}
+                  </td>
+
+                  <td>
+                    {{
+                      detail.updatedDate
+                        ? (detail.updatedDate | date : "dd/MM/yyyy")
+                        : "-"
+                    }}
+                  </td>
+
+                  <td>
+                    <span
+                      class="badge"
+                      [ngClass]="{
+                        'bg-success text-white': detail.status === 'QUOTED',
+                        'bg-warning text-dark': detail.status === 'PENDING',
+                        'bg-secondary text-white': detail.status === 'NEW'
+                      }"
+                    >
+                      {{ detail.status | titlecase }}
+                    </span>
+                  </td>
+
+                  <td>{{ detail.quotedAmount ?? 0 | number : "1.2-2" }}</td>
+
+                  <!-- MRP -->
+                  <td *ngIf="isEditableMode; else readonlyMrp">
+                    <input
+                      type="text"
+                      [(ngModel)]="detail.mrp"
+                      class="form-control form-control-sm text-end"
+                      (input)="calculateTotal()"
+                      (keypress)="allowOnlyNumbers($event)"
+                    />
+                  </td>
+                  <ng-template #readonlyMrp>
+                    <span class="text-end d-block">
+                      {{ detail.mrp > 0 ? detail.mrp : "N/A" }}
+                    </span>
+                  </ng-template>
+
+                  <!-- Discount -->
+                  <td>
+                    <ng-container *ngIf="isEditableMode; else readonlyDiscount">
+                      <input
+                        type="text"
+                        [(ngModel)]="detail.discount"
+                        class="form-control form-control-sm text-end"
+                        (input)="calculateTotal()"
+                        (keypress)="allowOnlyNumbers($event)"
+                      />
+                    </ng-container>
+                    <ng-template #readonlyDiscount>
+                      <span class="text-end d-block">
+                        {{ detail.discount ?? 0 | number : "1.2-2" }}
+                      </span>
+                    </ng-template>
+                  </td>
+
+                  <!-- GST -->
+                  <td>
+                    <ng-container *ngIf="isEditableMode; else readonlyGst">
+                      <input
+                        type="text"
+                        [(ngModel)]="detail.gst"
+                        class="form-control form-control-sm text-end"
+                        (input)="calculateTotal()"
+                        (keypress)="allowOnlyNumbers($event)"
+                      />
+                    </ng-container>
+                    <ng-template #readonlyGst>
+                      <span class="text-end d-block">
+                        {{ detail.gst ?? 0 | number : "1.2-2" }}
+                      </span>
+                    </ng-template>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div
+          class="modal-footer d-flex justify-content-between"
+          *ngIf="isEditableMode"
+        >
+          <div>
+            <strong>Total Quoted:</strong>
+            {{ totalQuotedAmount | number : "1.2-2" }} |
+            <strong>Total MRP:</strong> {{ totalMrp | number : "1.2-2" }}
+          </div>
+
+          <ng-container *ngIf="isQuoted; else submitQuoteBtn">
+            <button
+              class="btn btn-primary"
+              (click)="onUpdateMaterialSupplier()"
+            >
+              Update Quote
+            </button>
+          </ng-container>
+
+          <ng-template #submitQuoteBtn>
+            <button
+              class="btn btn-success"
+              (click)="onSubmitMaterialSupplier()"
+            >
+              Submit Quote
+            </button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

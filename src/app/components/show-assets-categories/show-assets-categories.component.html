@@ -1,0 +1,105 @@
+
+
+<div class="container main-container">
+  <div class="card card-container">
+      <div class="card-header">
+          <h1>Assets Categories Data</h1>
+      </div>
+      <div class="card-body border-right-primary border-left-primary">
+        <form [formGroup]="addServiceForm">
+          <div class="row">
+            <div class="col-md-3 form-group">
+              <label for="assetCat" style="color: blue;">Asset Category</label>
+              <!-- <input type="text" class="form-control" id="assetCat" name="assetCat" formControlName="assetCat" > -->
+              <select id="assetCat" class="form-control" [(ngModel)]="selectedAssetCat"  formControlName="assetCat" (change)="onDropDownChange1($event)">
+                <option value="" disabled selected>Select Asset Category</option>
+                <option *ngFor="let assetCat of assetCats" [value]="assetCat">{{ assetCat }}</option>
+              </select>
+            </div>
+             <div class="col-md-3 form-group">
+              <label for="assetSubCat" style="color: blue;">Asset SubCategory</label>
+              <select class="form-control" id="assetSubCat" formControlName="assetSubCat">
+                <option value="" disabled selected>Select subcategory </option>
+                <option *ngFor="let category of assetSubCats" [value]="category">{{ category }}</option>
+              </select>
+             </div>
+             <div class="col-md-3 form-group">
+              <label for="assetModel" style="color: blue;">Asset Model</label>
+              <!-- <input type="text" class="form-control" id="assetModel" name="assetModel" formControlName="assetModel" > -->
+              <select id="assetModel" class="form-control" [(ngModel)]="selectedAssetModel" placeholder="select assetModel" required formControlName="assetModel">
+                <option value="" disabled selected>Select Asset Model</option>
+                <option *ngFor="let assetModel of assetModels" [value]="assetModel">{{ assetModel }}</option>
+              </select>
+            </div>
+            <div class="col-md-3 form-group">
+              <label for="assetBrand" style="color: blue;">Asset Brand</label>
+              <!-- <input type="text" class="form-control" id="assetBrand" name="assetBrand" formControlName="assetBrand" > -->
+              <select id="assetBrand" class="form-control" [(ngModel)]="selectedAssetBrand" placeholder="select  assetBrand" required formControlName="assetBrand">
+                <option value="" disabled selected>Select Asset Brand</option>
+                <option *ngFor="let assetBrand of assetBrands" [value]="assetBrand">{{ assetBrand }}</option>
+              </select>
+            </div>
+            <div class="col-md-3 form-group">
+              <label for="assetBrand" style="color: blue;">Asset Id</label>
+              <input type="text" class="form-control" id="assetId" name="assetId" formControlName="assetId" >
+             
+            </div>
+          </div>
+          <div class="form-row mt-3">
+            <div class="col-md-12 text-center">
+              <button type="submit" class="btn btn-primary" (click)="search()">
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+   <!-- table -->
+   <div class="table-container">
+
+  <table class="table table-bordered table-striped mt-3">
+    <div class="d-flex justify-content-center" *ngIf="bool">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+   <thead>
+    <tr>
+       <th scope="col">Srl._No.</th>
+       <th scope="col">Asset._Id.</th>
+       <th scope="col">Category</th>
+       <th scope="col">Sub-Category</th>    
+       <th scope="col">Asset Model</th>
+       <th scope="col">Asset Brand</th>
+       <th scope="col">Addedby</th>
+       <th scope="col">Edit</th>
+    </tr>
+   </thead>
+<tbody>
+
+<tr *ngFor="let item of assetCategoryData | paginate: {itemsPerPage:20,currentPage:page,totalItems:totalLength}; let i = index">
+
+  <td>{{ i + 1 + (page - 1) * itemsPerPage }}</td>
+  <td>{{ item.assetId}}</td>
+  <td>{{ item.assetCat}}</td>
+  <td>{{ item.assetSubCat}}</td>
+  <td>{{ item.assetModel }}</td>
+  <td>{{ item.assetBrand }}</td>
+  <td>{{ item.addedBy }}</td>
+  <td>
+    <button class="btn btn-primary" (click)="editAssetCategory(item.assetId)">Edit</button>
+  </td>
+
+</tr>
+</tbody>
+
+      </table>
+
+      <div class="pagination">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+
+   </div>
+</div>
+

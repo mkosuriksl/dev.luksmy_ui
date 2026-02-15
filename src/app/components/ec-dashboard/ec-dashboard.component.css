@@ -1,0 +1,74 @@
+
+
+/* .extra {
+  flex: 1 1 auto;
+}
+.logo {
+  margin-left: 20px;
+}
+.sidenav-wrapper {
+  position: absolute;
+  top: 150px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
+}
+.mat-sidenav {
+  width: 250px;
+  padding:20px;
+}
+
+.button span {
+  margin: 10px;
+}
+
+.mat-sidenav button {
+  margin-bottom: 20px;
+} */
+
+
+/* .example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+} */
+
+.example-container {
+  height: 135%;
+  position: relative;
+  top:55px;
+  /* border: 1px solid rgba(0, 0, 0, 0.5); */
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+}
+
+
+.mat-sidenav {
+
+  padding:20px;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+.menu-text {
+  margin-left: 10px;
+}
+
+mat-icon {
+  color: #18aedf !important;
+}
+.container{
+  position: relative;
+  top:55px;
+}
+
+.mat-drawer.mat-drawer-side {
+  z-index: 2;
+  top: 65px;
+}
+
+
+
+

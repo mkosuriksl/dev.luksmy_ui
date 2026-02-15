@@ -1,0 +1,127 @@
+
+
+<div class="container-fluid mt-4 d-flex justify-content-center">
+
+
+    <div class="col-md-12 login-form card">
+            <div class="auctionFormRight" style="margin-top: 0px;">
+                <h3 class="aucformTitle text-center">Updata Asset For Your Home Services</h3>
+                <form [formGroup]="addAssetsForm" (ngSubmit)="addAssetsSubmit()">
+
+
+                    <!-- Assets Category -->
+                    <div class="form-group row mb-3">
+                      <label for="assetsCategory" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Assets Category</label>
+                      <div class="col-md-7">
+                          <!-- <input class="form-control" name="assetsCategory" placeholder="Enter Your assetsCategory" formControlName="assetsCategory" > -->
+                          <select id="assetCat" class="form-control" [(ngModel)]="selectedAssetCat" placeholder="select assetsCategory" formControlName="assetsCategory">
+                              <option value="" disabled selected>Select Asset Category</option>
+                              <option *ngFor="let assetCat of assetCats" [value]="assetCat">{{ assetCat }}</option>
+                            </select>
+                      </div>
+                  </div>
+  
+                  <!-- Assets Sub-Category -->
+                  <div class="form-group row mb-3">
+                    <label for="assetsSubCategory" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Assets Sub-Category</label>
+                    <div class="col-md-7">
+                        <!-- <input class="form-control" name="assetsSubCategory" placeholder="Enter Your assetssubCategory" formControlName="assetsSubCategory"> -->
+                        <select id="assetSubCat" class="form-control" [(ngModel)]="selectedAssetSubCat" placeholder="select assetssubCategory" formControlName="assetsSubCategory">
+                          <option value="" disabled selected>Select Asset SubCategory</option>
+                          <option *ngFor="let assetSubCat of assetSubCats" [value]="assetSubCat">{{ assetSubCat }}</option>
+                        </select>       
+                      
+                    </div>
+                </div>
+  
+  
+  
+                    <!-- Location Field -->
+  
+                    <div class="form-group row mb-3">
+                        <label for="city" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Location</label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" name="location" placeholder="Enter Your Location" required formControlName="location">
+                    </div>
+  </div>
+                    <!-- Street Field -->
+  
+                    <div class="form-group row mb-3">
+                        <label for="state" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Street</label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" name="state" placeholder="Enter Your Street" required formControlName="street">
+                        </div>
+                    </div>
+  
+                    <!-- Door No Field -->
+  
+                    <div class="form-group row mb-3">
+                        <label for="district" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Door Number</label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" name="doornumber" placeholder="Enter Your Door Number" required formControlName="doornumber">
+                        </div>
+                    </div>
+  
+                    <!-- Town field-->
+                    <div class="form-group row mb-3">
+                      <label for="district" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Town</label>
+                      <div class="col-md-7">
+                          <input type="text" class="form-control" name="town" placeholder="Enter Your Town" required formControlName="town">
+                      </div>
+                    </div>
+                    <!-- District field -->
+                    <div class="form-group row mb-3">
+                      <label for="district" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">District</label>
+                      <div class="col-md-7">
+                          <input type="text" class="form-control" name="district" placeholder="Enter Your District" required formControlName="district">
+                      </div>
+                    </div>
+                  <!-- State field -->
+                    <div class="form-group row mb-3">
+                      <label for="district" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">State</label>
+                      <div class="col-md-7">
+                          <input type="text" class="form-control" name="state" placeholder="Enter Your State" required formControlName="state">
+                      </div>
+                    </div>
+  
+                    <!-- Pincode field -->
+                    <div class="form-group row mb-3">
+                      <label for="district" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Pincode</label>
+                      <div class="col-md-7">
+                          <input type="text" class="form-control" name="pincode" placeholder="Enter Your Pincode" required formControlName="pincode">
+                      </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                      <label for="assetBrand" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Asset Brand</label>
+                      <div class="col-md-7">
+                          <!-- <input type="text" class="form-control" name="assetBrand" placeholder="Enter Your assetBrand" required formControlName="assetBrand"> -->
+                          <select id="assetBrand" class="form-control" [(ngModel)]="selectedAssetBrand" placeholder="select  assetBrand" required formControlName="assetBrand">
+                              <option value="" disabled selected>Select Asset Brand</option>
+                              <option *ngFor="let assetBrand of assetBrands" [value]="assetBrand">{{ assetBrand }}</option>
+                            </select>
+                      </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                      <label for="assetModel" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Asset Model</label>
+                      <div class="col-md-7">
+                          <!-- <input type="text" class="form-control" name="assetModel" placeholder="Enter Your assetModel" required formControlName="assetModel"> -->
+                          <select id="assetModel" class="form-control" [(ngModel)]="selectedAssetModel" placeholder="select assetModel" required formControlName="assetModel">
+                              <option value="" disabled selected>Select Asset Model</option>
+                              <option *ngFor="let assetModel of assetModels" [value]="assetModel">{{ assetModel }}</option>
+                            </select>
+                      </div>
+                    </div>
+  
+  
+                        <div class="col-md-7 offset-md-2 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary" style="width: 120px; background-color: #18aedf; color: white; font-size: 17px;">Update</button>
+                        </div>
+  
+                </form>
+            </div>
+    </div>
+</div>
+
+
+
+

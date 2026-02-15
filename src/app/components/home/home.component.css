@@ -1,0 +1,377 @@
+
+
+.line-1{
+  position: relative;
+  top: 50%;
+  width: 24em;
+  margin: 0 auto;
+  border-right: 2px solid rgba(255,255,255,.75);
+  font-size: 180%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  transform: translateY(-50%);
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 46% !important;
+  right: 16px;
+}
+/* .full-width-image {
+  width: 100%;
+  height: auto; 
+} */
+
+.bg-skyblue {
+  background-color: skyblue;
+  color: white; /* Set the text color to white */
+  font-weight: bold; /* Make the text bold */
+}
+.services-heading {
+  text-align: center;
+  background-color: #a3d1f6;
+  /* height: 37px; */
+  margin: 0px 28px 0px 10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  color: #ffffff;
+  font-weight: bold;
+}
+.foo-bg {
+  background-color: black;
+  padding-left: 10% !important;
+  padding-right: 10% !important;
+
+}
+ul {
+  list-style-type: none;
+  padding: 0px;
+}
+.address-inner {
+  font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+}
+.footer-box {
+  padding: 0 0 20px;
+}
+
+.address {
+    position: relative;
+    line-height: 1.6;
+    margin-bottom: 0;
+    color: #fff;
+}
+.footer-title {
+  margin: 0 0 18px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.extra-sty {
+  transform: rotate(360deg);
+  border-radius: 50%;
+  transform: scale(1.2); /* Zoom effect */
+
+}
+/* .heading {
+  color: #fff;
+  font-size: 50px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+} */
+
+
+
+@keyframes t{
+  from {background-size:0 200%}
+}
+@keyframes b{
+  50% {background-position:0 -100%,0 0}
+}
+
+.subheading {
+  color: #fff;
+  font-size: 25px;
+  line-height: 26pt;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.card-no-border {
+  border: none;
+  transition: border-color 0.3s;
+
+}
+.card:hover {
+  box-shadow: 0 0 20px rgba(24, 174, 223, 0.6);
+  transition: box-shadow 0.3s;
+}
+
+.card-no-border:hover {
+  border: 1px solid #18aedf;
+  cursor: pointer;
+}
+.justify-text {
+  text-align: justify;
+}
+.custom-bg {
+  background-color: #18aedf;
+}
+
+.single-place-image:hover {
+  transform: scale(1.2);
+}
+
+
+.single-place-image {
+  /* transition: 0.5s;
+  transform: scale(1); */
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+  position: relative;
+}
+.single-place-content {
+  position: absolute;
+  bottom: 1.6rem;
+  left: 0.5rem;
+  width: 100%;
+  padding: 0 1.875rem;
+  z-index: 10;
+
+}
+
+.single-place-title {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  transition: 0.5s;
+  transform: translateY(30px);
+}
+
+.single-place-title:hover {
+  transform: translateY(-5px); /* Adjust the value as needed for the desired move-up effect */
+}
+
+
+
+@media (max-width: 1000px) {
+
+  .text-container {
+    display: none; /* Hide the text content on small screens */
+  }
+}
+
+
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.min-height-contiainer {
+  min-height: 468px;
+}
+
+.card {
+  /* Your existing card styles */
+  overflow: hidden; /* Add this line to clip content that overflows */
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+
+}
+.bottom-right {
+  position: absolute;
+  bottom: 10%;
+  right: 16px;
+}
+
+.heading {
+  text-shadow: 3px 3px 20px green,
+    -2px 1px 30px green;
+    font-size:4vw;
+    color: white;
+}
+
+.subheading {
+  text-shadow:
+    1px 1px 2px black,
+    0 0 1em black,
+    0 0 0.2em black;
+  color: white;
+  font-size:1.5vw;
+
+}
+
+marquee {
+  font-size: 18px;
+  color: #333;
+  margin-top: 30px;
+  /* background-color: #f8f9fa; */
+  padding: 10px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.full-width-container {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.text-container {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.subheading {
+  font-size: 1.2rem;
+}
+.form-container {
+  background-color: #f8f9fa; /* Light gray background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Better box shadow */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.form-content {
+  background-color: #ffffff; /* White background for the form content */
+  padding: 5px;
+  border: 2px solid #dee2e6; /* Border around the form */
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for the form content */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-inline {
+  width: 100%;
+  max-width: 600px;
+}
+
+.form-inline .form-group {
+  display: flex;
+  align-items: center;
+}
+
+.form-inline .form-control {
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-inline .fa-search {
+  color: #007bff;
+}
+
+.form-inline .fa-search:hover {
+  color: #0056b3;
+  transition: color 0.3s;
+}
+
+.dropdown-item {
+  animation: dropdownFadeIn 0.3s ease-in-out;
+  animation-fill-mode: forwards;
+}
+.search-bar {
+  background-color: #0033a0; /* Blue background color */
+  border: 2px solid #008000; /* Green border */
+  padding: 10px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.search-bar .form-control {
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  width: 52%; /* Set to 40% width */
+}
+
+.search-bar button {
+  background-color: #008000; /* Green background for button */
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.search-bar select {
+  width: 60%; /* Set to 40% width */
+  margin-right: 10px; /* Adjust spacing as needed */
+}
+
+.search-bar input {
+  width: 50%; /* Set to 40% width */
+  margin-right: 10px; /* Adjust spacing as needed */
+}
+
+.text-center {
+  font-family: 'Arial, sans-serif';
+}
+
+.text-primary {
+  color: #007bff;
+}
+.header{
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  top:66px;
+}
+.innerContent{
+  position: fixed;
+  left: 24px;
+  width: 90%;
+  z-index: 1000;
+  top:100px; 
+  /* background:blue; */
+  padding-left: 5px;
+  color: black;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.innerContent.hide {
+  display: none;
+}

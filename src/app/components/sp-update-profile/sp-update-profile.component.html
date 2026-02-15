@@ -1,0 +1,78 @@
+
+
+<div class="container-fluid mt-4 d-flex justify-content-center">
+
+
+  <div class="col-md-7 login-form card">
+          <div class="auctionFormRight" style="margin-top: 0px;">
+              <h3 class="aucformTitle text-center">Updata Profile For Your Home Services</h3>
+              <form [formGroup]="updateForm" (ngSubmit)="updateSubmitForm()">
+
+
+
+                  <!-- Name Field -->
+                  <div class="form-group row mb-3">
+                      <label for="name" class="col-md-2 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Name</label>
+                      <div class="col-md-10">
+                          <input type="text" class="form-control" name="name" placeholder="Enter Your Name" required formControlName="name">
+                      </div>
+                  </div>
+
+                   <!-- Address Field -->
+                   <div class="form-group row mb-3">
+                    <label for="address" class="col-md-2 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Address</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="address" placeholder="Enter Your Address" required formControlName="address">
+                    </div>
+                </div>
+
+                  <!-- Location field -->
+
+                  <div class="form-group row mb-3">
+                    <label for="pincodeNo" class="col-md-2 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Location</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="pincodeNo" placeholder="Enter Your Location" title="Enter 6-digit pincode number" maxlength="6" required formControlName="location" #placesRef="ngx-places" ngx-gp-autocomplete [options]='options' (onAddressChange)="handleAddressChange($event)">
+                    </div>
+                </div>
+
+
+
+                  <!-- City Field -->
+
+                  <div class="form-group row mb-3">
+                      <label for="city" class="col-md-2 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">City</label>
+                      <div class="col-md-10">
+                          <input type="text" class="form-control" name="city" placeholder="Enter Your City" required formControlName="city">
+                      </div>
+                  </div>
+
+                  <!-- State Field -->
+
+                  <div class="form-group row mb-3">
+                      <label for="state" class="col-md-2 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">State</label>
+                      <div class="col-md-10">
+                          <input type="text" class="form-control" name="state" placeholder="Enter Your State" required formControlName="state">
+                      </div>
+                  </div>
+
+                  <!-- District Field -->
+
+                  <div class="form-group row mb-3">
+                      <label for="district" class="col-md-2 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">District</label>
+                      <div class="col-md-10">
+                          <input type="text" class="form-control" name="district" placeholder="Enter Your District" required formControlName="district">
+                      </div>
+                  </div>
+
+                      <div class="col-md-10 offset-md-2 d-flex justify-content-center">
+                          <button type="submit" class="btn btn-primary" style="width: 120px; background-color: #18aedf; color: white; font-size: 17px;">Update</button>
+                      </div>
+
+              </form>
+          </div>
+  </div>
+</div>
+
+
+
+

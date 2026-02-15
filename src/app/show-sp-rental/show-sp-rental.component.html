@@ -1,0 +1,135 @@
+<div class="container main-container" *ngIf="!editMode">
+  <div class="card card-container">
+    <div class="card-header">
+      <h1 style="margin-bottom: 0rem;">Show Rental Data</h1>
+    </div>
+    <div class="card-body border-right-primary border-left-primary">
+      <form [formGroup]="serviceRequestForm">
+        <div class="form-row">
+          <div class="col-md-3 form-group">
+            <label for="assetCat" style="color: blue;">Machine Category</label>
+            <input type="text" class="form-control" id="assetCat" name="assetCat" readonly formControlName="assetCat">
+            <!-- <select id="assetCat" class="form-control" [(ngModel)]="selectedAssetCat"  formControlName="assetsCategory">
+                      <option value="" disabled selected>Select Asset Category</option>
+                      <option *ngFor="let assetCat of assetCats" [value]="assetCat">{{ assetCat }}</option>
+                    </select> -->
+          </div>
+          <div class="col-md-3 form-group">
+            <label for="assetSubCat" style="color: blue;">Machine SubCategory</label>
+            <select class="form-control" id="assetSubCat" formControlName="assetSubCat">
+              <option value="" disabled selected>Select subcategory </option>
+              <option *ngFor="let category of assetSubCats" [value]="category">{{ category }}</option>
+            </select>
+          </div>
+
+          <div class="col-md-3 form-group">
+            <label for="location" style="color: blue;">Location</label>
+            <input type="text" class="form-control" id="field3" name="field3" formControlName="location"
+              #placesRef="ngx-places" ngx-gp-autocomplete [options]='options'
+              (onAddressChange)="handleAddressChange($event)">
+          </div>
+
+          <div class="col-md-3 form-group">
+            <label for="assetId" style="color: blue;">Machine ID
+            </label>
+            <input type="text" class="form-control" id="assetId" name="assetId" formControlName="assetId">
+
+          </div>
+          <div class="col-md-3 form-group">
+            <label for="assetModel" style="color: blue;">Machine Model</label>
+            <!-- <input type="text" class="form-control" id="assetModel" name="assetModel" formControlName="assetModel" > -->
+            <select id="assetModel" class="form-control" [(ngModel)]="selectedAssetModel"
+              placeholder="select assetModel" required formControlName="assetModel">
+              <option value="" disabled selected>Select Asset Model</option>
+              <option *ngFor="let assetModel of assetModels" [value]="assetModel">{{ assetModel }}</option>
+            </select>
+          </div>
+          <div class="col-md-3 form-group">
+            <label for="assetBrand" style="color: blue;">Machine Brand</label>
+            <!-- <input type="text" class="form-control" id="assetBrand" name="assetBrand" formControlName="assetBrand" > -->
+            <select id="assetBrand" class="form-control" [(ngModel)]="selectedAssetBrand"
+              placeholder="select  assetBrand" required formControlName="assetBrand">
+              <option value="" disabled selected>Select Asset Brand</option>
+              <option *ngFor="let assetBrand of assetBrands" [value]="assetBrand">{{ assetBrand }}</option>
+            </select>
+          </div>
+
+
+
+
+
+        </div>
+
+        <div class="form-row mt-3">
+          <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-primary" (click)="search()">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- table -->
+  <div class="table-container">
+
+    <table class="table table-bordered table-striped mt-3">
+      <div class="d-flex justify-content-center" *ngIf="bool">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <thead>
+        <tr>
+          <th scope="col">Asset Id</th>
+          <th scope="col">User Id</th>
+          <th scope="col">IsAvail Rent</th>
+          <th scope="col">Amount PerDay</th>
+          <th scope="col">Amount per30days</th>
+          <th scope="col">pickup</th>
+          <th scope="col">Available Location</th>
+          <th scope="col">Delivery</th>
+          <th scope="col">EDIT</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr
+          *ngFor="let item of assetCategoryData | paginate: { itemsPerPage: itemsPerPage, currentPage: page }; let i = index">
+          <td>{{ item.assetId}}</td>
+          <td>{{ item.userId}}</td>
+          <td>{{ item.isAvailRent}}</td>
+          <td>{{ item.amountPerDay }}</td>
+          <td>{{ item.amountPer30days }}</td>
+          <td>{{ item.pickup }}</td>
+          <td>{{ item.availableLocation }}</td>
+          <td>{{ item.delivery }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="editRental(item)">Edit</button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <label for="recordsPerPage" class="pagination-text">Items Per Page:&nbsp;</label>
+          <select id="recordsPerPage" class="form-select" style="width: auto; display: inline-block;"
+            (change)="onRecordsPerPageChange($event)">
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+
+        </div>
+        <p class="pagination-text">Showing {{ assetCategoryData.length }} records</p>
+      </div>
+
+      <pagination-controls class="pagination-text" (pageChange)="page = $event"
+        style="margin-top: 0.4rem;"></pagination-controls>
+    </div>
+
+  </div>
+</div>
+
+<app-update-sp-rental *ngIf="editMode" [data]="selected" (back)="back($event)"></app-update-sp-rental>

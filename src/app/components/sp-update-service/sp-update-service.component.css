@@ -1,0 +1,243 @@
+/* body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.update-service-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.service-details-card {
+
+  background-color: #18aedf;
+  height : 300px;
+  width: 1000px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.detail-item {
+  color: white;
+  margin-bottom: 25px;
+  font-size: 40px;
+}
+
+strong {
+  margin-right: 5px;
+}
+
+.update-button {
+
+  background-color: #18aedf;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: 25px;
+}
+
+
+.aucformTitle {
+
+  border: 3px solid #18aedf;
+  color: #18aedf;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-weight: 800;
+  font-size: xx-large;
+}
+
+.service-details-card h2 {
+  font-size: 24px;
+
+}
+
+.service-details-card p {
+  font-size: 18px;
+}
+
+.service-details-card .detail-item {
+  font-size: 16px;
+} */
+
+/* 2nd  */
+
+/* body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.update-service-container {
+  max-width: 600px;
+  width: 300px;
+  height: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.service-details-heading {
+  margin-bottom: 20px;
+}
+
+.service-details-card {
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  margin-bottom: 10px;
+}
+
+.update-button {
+  cursor: pointer;
+} */
+
+/* 3RD ONE */
+
+body {
+  font-family: 'Times New Roman', Times, serif
+}
+
+.form-container {
+  border: 2px solid #ddd;
+  width: 50%;
+  /* Adjust width as needed */
+  margin-right: 20px;
+  /* Adjust margin as needed */
+  /* width: 600px; */
+  max-width: 600px;
+  margin: 0 auto;
+  /* Center the form horizontally */
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-left: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  align-items: center;
+
+}
+
+.selected-services {
+  flex: 1;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.services-container {
+  position: absolute;
+  margin-left: 10px;
+  top: 0;
+  right: 0;
+  /* Add styling for the services container as needed */
+}
+
+.form-group label {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: medium;
+}
+
+.form-check-input {
+  background-color: #d7c4c4;
+}
+
+/* Style for checked radio buttons */
+.form-check-input:checked {
+  background-color: #555;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.showndata {
+  margin-top: 150px;
+  margin-bottom: 100px;
+  height: auto;
+
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+
+}
+
+.btn-primary {
+  background-color: #007BFF;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+input[type="checkbox"] {
+  margin-top: 8px;
+}
+
+.aucformTitle {
+  background-color: #4caf50;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.form-and-services-container {
+  display: flex;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  /* background: indigo; */
+  color: black;
+}
+
+mat-checkbox {
+  margin-right: 10px;
+}
+
+.container {
+  position: relative;
+  top: 50px;
+}
+
+.form-scrollable-container {
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding-right: 10px;
+}

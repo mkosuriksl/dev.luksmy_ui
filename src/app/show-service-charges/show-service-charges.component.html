@@ -1,0 +1,125 @@
+
+<div class="container main-container" *ngIf="!screenUpdate">
+    <div class="card card-container">
+        <div class="card-header">
+            <h1 style="margin-bottom: 0rem;">Service Charge </h1>
+        </div>
+        <div class="card-body border-right-primary border-left-primary">
+            <form [formGroup]="serviceRequestForm" >
+                <div class="form-row">
+                  <div class="col-md-3 form-group">
+                    <label  style="color: blue;">Service Category</label>
+                    <input
+          type="text"
+         id="serviceCategory"
+          class="form-control"
+          readonly
+          [(ngModel)]="sCategory"
+          formControlName="serviceCategory"
+        />
+                </div>
+                    <div class="col-md-3 form-group">
+                        <label for="subcategory" style="color: blue;">Service Sub Category</label>
+                        <select class="form-control" id="subcategory" formControlName="subcategory">
+                          <option value="" disabled selected>Select service SubCategory</option>
+                          <option *ngFor="let category of assetSubCats" [value]="category">{{ category }}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label for="location" style="color: blue;">Location</label>
+                        <input type="text" class="form-control" id="field3" name="field3" formControlName="location" #placesRef="ngx-places" ngx-gp-autocomplete [options]='options' (onAddressChange)="handleAddressChange($event)">
+                    </div>
+                   
+                    <div class="col-md-3 form-group ">
+                        <label for="location" style="color: blue;">Asset Brand</label>
+                        <select id="brand" class="form-control" [(ngModel)]="selectedAssetBrand" placeholder="select  assetBrand" required formControlName="brand">
+                            <option value="" disabled selected>Select Asset Brand</option>
+                            <option *ngFor="let assetBrand of assetBrands" [value]="assetBrand">{{ assetBrand }}</option>
+                          </select>
+                  </div>
+                  <div class="col-md-3 form-group ">
+                    <label for="location" style="color: blue;">Asset Model</label>
+                    <select id="model" class="form-control" [(ngModel)]="selectedAssetModel" placeholder="select assetModel" required formControlName="model">
+                        <option value="" disabled selected>Select Asset Model</option>
+                        <option *ngFor="let assetModel of assetModels" [value]="assetModel">{{ assetModel }}</option>
+                      </select>
+                </div>
+                   
+                </div>
+  
+                <div class="form-row mt-3">
+                  <div class="col-md-12 text-center">
+                      <button type="submit" class="btn btn-primary" (click)="search()">Search</button>
+                  </div>
+              </div>
+            </form>
+        </div>
+    </div>
+     <!-- table -->
+     <div class="table-container">
+  
+        <table class="table table-bordered table-striped mt-3">
+          <div class="d-flex justify-content-center" *ngIf="bool">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+     <thead>
+      <tr>
+
+
+         <th scope="col">Seq No.</th>
+         <th scope="col">Brand</th>
+         <th scope="col">Model</th>
+         <th scope="col">Location</th>
+         <th scope="col">Service Charge</th>
+         <th scope="col">Service ChargeKey</th>
+         <th scope="col">Service Id</th>
+         <th scope="col">Updated By</th>
+         <th scope="col">Updated Date</th>
+        <th scope="col">Action</th>
+      </tr>
+     </thead>
+  <tbody>
+  <!-- Add table data here -->
+  <tr *ngFor="let item of tableData | paginate: { itemsPerPage: itemsPerPage, currentPage: page }; let i = index">
+    <td>{{item.bodSeqNo}}</td>
+    <td>{{ item.brand}}</td>
+    <td>{{ item.model }}</td>
+    <td>{{ item.location }}</td>
+    <td>{{ item.serviceCharge }}</td>
+    <td>{{ item.serviceChargeKey }}</td>
+    <td>{{ item.serviceId }}</td>
+    <td>{{ item.updatedBy }}</td>
+    <td>{{ item.updatedDate | date: 'dd/MM/yyyy'}}</td>
+    <td><button class="btn btn-primary" (click)="updateScreen(true,item)">Update</button></td>
+  
+  </tr>
+  </tbody>
+  
+        </table>
+  
+        <div class="pagination">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <label for="recordsPerPage" class="pagination-text">Items Per Page:&nbsp;</label>
+              <select id="recordsPerPage" class="form-select" style="width: auto; display: inline-block;"
+                (change)="onRecordsPerPageChange($event)">
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+    
+            </div>
+            <p class="pagination-text">Showing {{ tableData.length }} records</p>
+          </div>
+    
+          <pagination-controls  class="pagination-text" (pageChange)="page = $event"  style="margin-top: 0.4rem;"></pagination-controls>
+        </div>
+  
+     </div>
+  </div>
+
+  <app-update-service-charge *ngIf="screenUpdate" [data]="selectedCharge" (back)=" back($event)"></app-update-service-charge>
+  

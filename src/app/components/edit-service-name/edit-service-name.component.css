@@ -1,0 +1,85 @@
+/* edit-service-name.component.css */
+
+/* h1 {
+  text-align: center;
+  color: #333;
+}
+
+form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+} */
+
+
+/* Add this CSS to your component's style file (e.g., edit-service-name.component.css) */
+
+
+
+
+
+h1 {
+  border-bottom: 2px solid #007bff; /* Add a solid border at the bottom of the h1 element */
+  padding-bottom: 10px; /* Add bottom padding for spacing */
+  text-align: center; /* Center the text horizontally */
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+button {
+  margin-top: 15px; /* Add top margin for spacing between buttons and form inputs */
+  background-color: #007bff; /* Set the background color of the button */
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.container, .container-fluid{
+  position:relative;
+  top:50px;
+}

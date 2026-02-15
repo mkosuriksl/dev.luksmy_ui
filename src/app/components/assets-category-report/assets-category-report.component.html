@@ -1,0 +1,58 @@
+<!-- <div class="container main-container"> -->
+  <!-- <div class="card card-container">
+    <div class="card-header">
+      <h1>Assets Category Report</h1>
+      <button mat-icon-button mat-dialog-close class="close-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div> -->
+  <div class="container p-3">
+  <div>
+    <h1 mat-dialog-title style="float: left">Assets Category Report</h1>
+    <!-- <span style="float: right" [mat-dialog-close]>X</span> -->
+    <button mat-icon-button mat-dialog-close class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content style="clear: both">
+      <table class="table table-bordered table-striped mt-3">
+        <thead>
+          <tr>
+            <th>Srl. No.</th>
+            <th>Asset Category</th>
+            <th>Asset Sub-Category</th>
+            <th>Location</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Add table data here -->
+          <tr
+            *ngFor="
+              let item of tableData
+                | paginate
+                  : {
+                      itemsPerPage: 8,
+                      currentPage: page,
+                      totalItems: totalLength
+                    };
+              let i = index
+            "
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.asset_cat }}</td>
+            <td>{{ item.asset_sub_cat }}</td>
+            <td>{{ item.location }}</td>
+
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+
+<!-- </div> -->
+

@@ -1,0 +1,132 @@
+
+.nav-item {
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 10px;
+  /* font-weight: bold; */
+  font-size: 17px;
+  font-weight: 400;
+  /* color: #583838; */
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-family: Roboto,sans-serif;
+
+}
+
+.nav-link:hover {
+  color: #49b8d6;
+}
+.ddcol {
+  background-color: white;
+  color: black;
+}
+
+.navbar {
+  z-index: 3;
+  margin-left: -1rem;
+}
+
+
+.nav-item:hover{
+  color: #ffffff;
+}
+.b{
+  border:none;
+}
+.card-img-top{
+  height:350px;
+}
+
+.dropdown-item:hover {
+  background-color: #3498db;
+  color: #ffffff;
+}
+
+.additional-links {
+  display: flex;
+  justify-content: space-around;
+  /* background-color: #9FA6B2;  */
+  /* padding: 10px; */
+}
+
+.additional-links a {
+
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.additional-links a:hover {
+  background-color: #b9b1b1; /* Background color on hover */
+}
+
+/* navbar.component.css */
+/*
+.navbar-nav .nav-item .nav-link {
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-size: 16px;
+} */
+
+/* Example styles for the dropdown menu items */
+.dropdown-menu .dropdown-item {
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-size: 14px;
+  z-index:5000;
+
+}
+
+.header-default {
+  position: fixed;
+  left: 15px;
+  width: 100%;
+  z-index: 5000;
+  top: 0;
+  background-color: #f8f9fa; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.header-logged-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px; 
+  padding: 0 20px;
+}
+
+.text {
+  font-family: 'Arial', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  animation: text-animation 3s ease-in-out infinite;
+}
+
+.brand-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 200;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 50px;
+    padding: 5px 10px;
+  }
+}
+
+

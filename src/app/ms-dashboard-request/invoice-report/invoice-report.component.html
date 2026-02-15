@@ -1,0 +1,406 @@
+<div class="container-fluid py-2">
+  <div class="card shadow-sm">
+    <div
+      class="card-header bg-primary text-white d-flex justify-content-between align-items-center"
+    >
+      <h4 class="mb-0">Invoice Report</h4>
+      <i
+        class="fa fa-filter filter-toggle-icon"
+        (click)="toggleFilter()"
+        title="Toggle Filters"
+      ></i>
+    </div>
+
+    <div
+      class="card-body border-start border-end border-primary"
+      *ngIf="showFilter"
+    >
+      <form
+        [formGroup]="materialRequestForm"
+        (ngSubmit)="search()"
+        class="p-3"
+        style="background: #f1f3f5; border-radius: 8px"
+      >
+        <div class="row g-3">
+          <!-- Material Category -->
+          <div class="col-12 col-md-3">
+            <label class="form-label fw-medium text-primary"
+              >Material Category</label
+            >
+            <select
+              class="form-select rounded-3"
+              formControlName="materialCategory"
+              (change)="onCategoryChange($event)"
+            >
+              <option value="">All Category</option>
+              <option *ngFor="let cat of categories" [value]="cat.category">
+                {{ cat.category }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Material Subcategory -->
+          <div class="col-12 col-md-3">
+            <label class="form-label fw-medium text-primary"
+              >Material Subcategory</label
+            >
+            <select
+              class="form-select rounded-3"
+              formControlName="materialSubCategory"
+              (change)="onSubCategoryChange($event)"
+            >
+              <option value="">Select Subcategory</option>
+              <option *ngFor="let sub of subCategories" [value]="sub">
+                {{ sub }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Brand -->
+          <div class="col-12 col-md-3">
+            <label class="form-label fw-medium text-primary">Brand</label>
+            <select class="form-select rounded-3" formControlName="brand">
+              <option value="">Select Brand</option>
+              <option *ngFor="let b of brands" [value]="b">{{ b }}</option>
+            </select>
+          </div>
+
+          <!-- Material Request ID -->
+          <div class="col-12 col-md-3">
+            <label class="form-label text-primary">Material Request ID</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="cMatRequestIdLineid"
+              placeholder="Enter Material Request ID"
+            />
+          </div>
+
+          <!-- From Date -->
+          <div class="col-12 col-md-3">
+            <label class="form-label text-primary">From Invoice Date</label>
+            <input
+              type="date"
+              class="form-control"
+              formControlName="fromDate"
+            />
+          </div>
+
+          <!-- To Date -->
+          <div class="col-12 col-md-3">
+            <label class="form-label text-primary">To Invoice Date</label>
+            <input type="date" class="form-control" formControlName="toDate" />
+          </div>
+
+          <!-- Invoice Number -->
+          <div class="col-12 col-md-3">
+            <label class="form-label text-primary">Invoice Number</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="invoiceNumber"
+              placeholder="Enter Invoice Number"
+            />
+          </div>
+
+          <!-- Quoted Amount -->
+          <div class="col-12 col-md-3">
+            <label class="form-label text-primary">Quoted Amount</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="quotedAmount"
+              placeholder="Enter Quoted Amount"
+              step="0.01"
+            />
+          </div>
+
+          <!-- Status -->
+          <div class="col-12 col-md-3">
+            <label class="form-label text-primary">Quotation Status</label>
+            <select class="form-select" formControlName="status">
+              <option value="">Select Status</option>
+              <option value="ACTIVE">ACTIVE</option>
+              <option value="INACTIVE">INACTIVE</option>
+              <option value="DEACTIVATED">DEACTIVATED</option>
+              <option value="QUOTED">QUOTED</option>
+              <option value="NEW">NEW</option>
+              <option value="PENDING">PENDING</option>
+              <option value="IN_PROGRESS">IN_PROGRESS</option>
+              <option value="COMPLETED">COMPLETED</option>
+              <option value="INVOICED">INVOICED</option>
+              <option value="CANCELED">CANCELED</option>
+              <option value="APPROVED">APPROVED</option>
+            </select>
+          </div>
+
+          <!-- Search Button -->
+          <div class="col-12 col-md-3 d-flex align-items-end">
+            <button
+              type="submit"
+              class="btn btn-primary px-4 fw-semibold w-100"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="mt-3">
+    <div class="d-flex justify-content-center my-3" *ngIf="loading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <ag-grid-angular
+      class="ag-theme-alpine my-custom-grid"
+      style="width: 100%; height: 40vh"
+      [rowData]="tableData"
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef"
+      [animateRows]="true"
+      (gridReady)="onGridReady($event)"
+    >
+    </ag-grid-angular>
+
+    <div
+      *ngIf="!loading && tableData.length === 0"
+      class="text-center mt-3 text-muted"
+    >
+      No records found.
+    </div>
+  </div>
+  <div
+    class="modal fade show"
+    tabindex="-1"
+    [ngStyle]="{ display: showDetailsModal ? 'block' : 'none' }"
+    *ngIf="showDetailsModal"
+  >
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Invoice Details -
+            {{ selectedQuotationDetails[0]?.quotationId || "" }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="showDetailsModal = false; selectedQuotationDetails = []"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Loading -->
+          <div *ngIf="detailsLoading" class="text-center py-4">
+            <div class="spinner-border text-primary" role="status"></div>
+          </div>
+
+          <!-- No data -->
+          <div
+            *ngIf="!detailsLoading && selectedQuotationDetails.length === 0"
+            class="text-muted text-center py-3"
+          >
+            No detail records found.
+          </div>
+
+          <!-- Details Table -->
+          <div
+            class="table-responsive"
+            *ngIf="!detailsLoading && selectedQuotationDetails.length"
+          >
+            <table class="table table-bordered table-sm align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>#</th>
+                  <th>Quotation Line ID</th>
+                  <th>Invoice Line ID</th>
+                  <th>Quotation ID</th>
+                  <th>Invoice Number</th>
+                  <th>Material Request ID</th>
+                  <th>Supplier ID</th>
+                  <th>Quoted Amount</th>
+                  <th>GST</th>
+                  <th>Quotation Status</th>
+                  <th>Invoice Status</th>
+                  <th>Invoice Date</th>
+                  <th>Quoted Date</th>
+                  <th>Updated Date</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let d of selectedQuotationDetails; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ d.quotationIdLineId || "-" }}</td>
+                  <td>{{ d.invoiceNumberLineId || "-" }}</td>
+                  <td>{{ d.quotationId || "-" }}</td>
+                  <td>{{ d.invoiceNumber || "-" }}</td>
+                  <td>{{ d.cmatRequestId || "-" }}</td>
+                  <td>{{ d.supplierId || "-" }}</td>
+                  <td>{{ d.quotedAmount ?? "-" }}</td>
+                  <td>{{ d.gst ?? "-" }}</td>
+                  <td>{{ d.quotationStatus || "-" }}</td>
+                  <td>{{ d.invoiceStatus || "-" }}</td>
+                  <td>{{ d.invoiceDate || "-" }}</td>
+                  <td>{{ d.quotedDate || "-" }}</td>
+                  <td>{{ d.updatedDate || "-" }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            class="btn btn-secondary"
+            (click)="showDetailsModal = false; selectedQuotationDetails = []"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop fade show" *ngIf="showDetailsModal"></div>
+
+  <div class="card shadow-sm border-0 mt-3" *ngIf="expandedInvoiceNumber">
+    <!-- Header -->
+    <div
+      class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-2"
+    >
+      <div class="d-flex align-items-center">
+        <i class="fas fa-truck text-primary me-2"></i>
+        <div>
+          <div class="fw-semibold text-dark">Update Delivery</div>
+          <small class="text-muted">Invoice: {{ expandedInvoiceNumber }}</small>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-secondary"
+        (click)="expandedInvoiceNumber = null"
+      >
+        <i class="fas fa-times me-1"></i> Close
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body bg-light">
+      <form [formGroup]="deliveryForm" (ngSubmit)="saveDelivery()">
+        <div class="row g-3">
+          <!-- Pickup Status -->
+          <div class="col-12 col-md-4 col-lg-3">
+            <label class="form-label fw-semibold mb-1">Pickup Status</label>
+            <select class="form-select" formControlName="pickupStatus">
+              <option value="" disabled selected>Select pickup status</option>
+              <option value="ReadyToPickUp">Ready to Pick Up</option>
+              <option value="PickedUp">Picked Up</option>
+            </select>
+          </div>
+
+          <!-- Delivery Partner -->
+          <div class="col-12 col-md-4 col-lg-3">
+            <label class="form-label fw-semibold mb-1">Delivery Partner</label>
+            <select class="form-select" formControlName="deliveryPartner">
+              <option value="" disabled selected>
+                Select delivery partner
+              </option>
+              <option value="Delhivery">Delhivery</option>
+              <option value="DTDC">DTDC</option>
+              <option value="Bluedart">Blue Dart</option>
+            </select>
+          </div>
+
+          <!-- Delivery Status -->
+          <div class="col-12 col-md-4 col-lg-3">
+            <label class="form-label fw-semibold mb-1">Delivery Status</label>
+            <select class="form-select" formControlName="deliveryStatus">
+              <option value="" disabled selected>Select delivery status</option>
+              <option value="ReadyToDeliver">Ready to Deliver</option>
+              <option value="InTransit">In Transit</option>
+              <option value="Delivered">Delivered</option>
+            </select>
+          </div>
+
+          <!-- Phone -->
+          <div class="col-12 col-md-6 col-lg-3">
+            <label class="form-label fw-semibold mb-1">Phone Number</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="phoneNumber"
+              placeholder="Enter 10-digit mobile number"
+            />
+          </div>
+
+          <!-- Truck Number -->
+          <div class="col-12 col-md-6 col-lg-3">
+            <label class="form-label fw-semibold mb-1">Truck Number</label>
+            <input
+              type="text"
+              class="form-control text-uppercase"
+              formControlName="truckNumber"
+              placeholder="Enter vehicle number (e.g., KA01AB1234)"
+            />
+          </div>
+
+          <!-- Driver Name -->
+          <div class="col-12 col-md-6 col-lg-3">
+            <label class="form-label fw-semibold mb-1">Driver Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="driverName"
+              placeholder="Enter driver name"
+            />
+          </div>
+
+          <!-- Buttons -->
+          <div
+            class="col-12 col-lg-6 d-flex align-items-end justify-content-end gap-2"
+          >
+            <button
+              type="button"
+              class="btn btn-outline-secondary px-4"
+              (click)="expandedInvoiceNumber = null"
+            >
+              Cancel
+            </button>
+
+            <button
+              class="btn btn-primary px-4"
+              type="submit"
+              [disabled]="deliverySaving"
+            >
+              <span *ngIf="!deliverySaving">
+                <i class="fas fa-save me-1"></i> Save
+              </span>
+
+              <span *ngIf="deliverySaving">
+                <span
+                  class="spinner-border spinner-border-sm me-2"
+                  role="status"
+                ></span>
+                Saving...
+              </span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Footer hint -->
+    <div class="card-footer bg-white border-top py-2">
+      <small class="text-muted">
+        Please make sure delivery status & pickup status are updated correctly
+        before saving.
+      </small>
+    </div>
+  </div>
+
+  <div class="modal-backdrop fade show" *ngIf="showDetailsModal"></div>
+</div>

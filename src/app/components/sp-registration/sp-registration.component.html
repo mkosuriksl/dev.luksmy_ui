@@ -1,0 +1,178 @@
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-5">
+      <img src="assets/images/bu.png" class="img-fluid" alt="Your Image">
+      <div class="col-md-12 col-xs-12 col-sm-12 res3">
+<ul class="sellCarInfolist dotted-list">
+
+   <li>
+     <div>
+
+     </div>
+   </li>
+
+   <br>
+   <li>
+     <div >
+       <h2>We undertake Annual Maintainence of Apartments and commercials buildings and Appliances</h2>
+     </div>
+   </li>
+ </ul>
+            </div>
+    </div>
+    <div class="col-md-7 login-form card">
+            <div class="auctionFormRight" style="margin-top: 0px;">
+                <h3 class="aucformTitle text-center">Service Engineer Registration</h3>
+                <form [formGroup]="signupForm" (ngSubmit)="signupSubmit()">
+                  
+               <div class="form-group row mb-3">
+                <label for="serviceCategory" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Service Category</label>
+                <div class="col-md-8">
+    
+                    <select class="form-control ml-2" id="assetSubCat1" [(ngModel)]="selectedCategory" formControlName="serviceCategory" >
+                      <option value=""  selected>Service Category</option>
+                      <option *ngFor="let category of serviceCategories" [value]="category">{{ category }}</option>
+                    </select>
+                </div>
+             
+            </div>
+         <!-- Name Field -->
+         <div class="form-group row mb-3">
+          <label for="name" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Name<span style="color: red">*</span></label>
+          <div class="col-md-8">
+              <input type="text" class="form-control" name="name" placeholder="Enter Your Name" required formControlName="name">
+          </div>
+      </div>
+
+      <!-- Mobile Number Field -->
+
+      <div class="form-group row mb-3">
+        <label for="mobileNo" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Mobile<span style="color: red">*</span></label>
+        <div class="col-md-8 d-flex align-items-center">
+          <input type="text" class="form-control" name="mobileNo" placeholder="Enter Your Mobile No" pattern="[1-9]{1}[0-9]{9}" title="Enter 10-digit mobile number" maxlength="10" formControlName="mobile" required>
+        </div>
+
+
+        <div class="text-danger mt-2 text-end" *ngIf="signupForm.get('mobile')?.errors?.['numeric']">
+          Please enter a valid mobile number (numeric only).
+        </div>
+      </div>
+
+
+                    <!-- Email ID Field -->
+                    <div class="form-group row mb-3">
+                        <label for="emailId" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Email ID<span style="color: red">*</span></label>
+                        <div class="col-md-8 d-flex align-items-center">
+                            <input type="text" class="form-control" name="emailId" placeholder="Enter Your Email Id" required formControlName="email">
+
+                          </div>
+
+                          <div class="text-danger mt-2 text-end" *ngIf="signupForm.get('email')?.errors?.['gmail']">
+                            Please enter a valid Email address.
+                          </div>
+
+
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="form-group row mb-3">
+                        <label for="password" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Password<span style="color: red">*</span></label>
+                        <div class="col-md-8">
+                            <input type="password" class="form-control" name="password" placeholder="Enter Your Password" required formControlName="password">
+                        </div>
+                    </div>
+
+            
+                 
+
+                  <div class="form-group row mb-3">
+                    <label for="pincodeNo" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Pincode No</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="pincodeNo" placeholder="pincodeNo" required formControlName="pincodeNo">
+                    </div>
+                </div>
+
+                  <!-- City Field -->
+
+                    <div class="form-group row mb-3">
+                      <label for="city" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">City</label>
+                      <div class="col-md-8">
+                          <input type="text" class="form-control" name="city" placeholder="Enter Your City" required formControlName="city">
+                      </div>
+                  </div>
+
+                    <!-- Location Field -->
+
+                    <div class="form-group row mb-3">
+                        <label for="address" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Address</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="address" placeholder="Enter address" title="Enter address"  required formControlName="address" #placesRef="ngx-places" ngx-gp-autocomplete [options]='options' (onAddressChange)="handleAddressChange($event)">
+                        </div>
+                    </div>
+
+
+
+
+
+                    <!-- State Field -->
+
+                    <div class="form-group row mb-3">
+                        <label for="state" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">State</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="state" placeholder="Enter Your State" required formControlName="state">
+                        </div>
+                    </div>
+
+                    <!-- District Field -->
+
+                    <div class="form-group row mb-3">
+                        <label for="district" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">District</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="district" placeholder="Enter Your District" required formControlName="district">
+                        </div>
+                    </div>
+                     <!-- Business name Field -->
+
+                     <!-- <div class="form-group row mb-3">
+                      <label for="businessName" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Business Name</label>
+                      <div class="col-md-8">
+                          <input type="text" class="form-control" name="businessName" placeholder="Business Name" required formControlName="businessName">
+                      </div>
+                  </div> -->
+
+                  <!-- user type  -->
+
+                  <!-- <div class="form-group row mb-3">
+                      <label for="district" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">User Type</label>
+                      <div class="col-md-8">
+                          <input type="text" class="form-control" name="userType" placeholder="userType" required formControlName="userType" data-bs-toggle="tooltip" title="userType for servicePerson is Developer">
+                      </div>
+                  </div> -->
+               <!-- serviceCategory Field -->
+
+
+                    <!-- Terms and Conditions Checkbox -->
+                    <div class="form-group row mb-3">
+                        <div class="col-md-8 offset-md-2">
+                            <input type="checkbox" class="form-check-input" name="check_agree" id="check_agree" required value="y">
+                            <label class="form-check-label" for="check_agree">
+                                <a href="condtions.jsp" target="_blank" style="color: #18aedf; font-size: 16px;">I agree to the terms and conditions</a>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Register Button -->
+                    <div class="form-group row mb-3">
+                        <div class="col-md-8 offset-md-2 text-center">
+                            <button type="submit" class="btn btn-success" style="width: 120px;"  [disabled]="!signupForm.get('name')?.value || !signupForm.get('mobile')?.value || !signupForm.get('email')?.value || !signupForm.get('password')?.value">REGISTER</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </div>
+  </div>
+
+
+</div>
+

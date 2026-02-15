@@ -1,0 +1,65 @@
+
+<div class="container mt-0 d-flex justify-content-center">
+
+
+  <div class="col-md-7 login-form card">
+          <div class="auctionFormRight" style="margin-top: 0px;">
+              <h3 class="aucformTitle text-center">Add Assets Category For Your Home Services</h3>
+              <form [formGroup]="addAssetsCategoryForm" (ngSubmit)="addAssetsCategorySubmit()">
+
+
+                  <!-- Assets Category -->
+                  <div class="form-group row mb-3">
+                    <label for="Category" class="col-md-2 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Asset Category</label>
+                    <div class="col-md-10">
+                        <!-- <select class="form-control" name="category" formControlName="category" >
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="Residence">Residence</option>
+                            <option value="Hotel">Hotel</option>
+                            <option value="Apartment">Apartment</option>
+                        </select> -->
+                        <input type="text" class="form-control" name="category" placeholder="Enter Category" required formControlName="category">
+                    </div>
+                </div>
+
+                <!-- Assets Sub-Category -->
+                <div class="form-group row mb-3">
+                  <label for="SubCategory" class="col-md-2 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Asset Sub-Category</label>
+                  <div class="col-md-10">
+                      <!-- <select class="form-control" name="assetsSubCategory" formControlName="subcategory">
+                          <option value="" disabled selected>Select Sub-Category</option>
+                          <option value="Residence">Residence</option>
+                          <option value="Hotel">Hotel</option>
+                          <option value="Apartment">Apartment</option>
+                      </select> -->
+                      <input type="text" class="form-control" name="assetsSubCategory" placeholder="Enter Sub-Category" required formControlName="subcategory">
+                  </div>
+              </div>
+
+              <div class="form-group row mb-3">
+                <label for="assetBrand" class="col-md-2 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Asset Brand</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="assetBrand" placeholder="Enter Asset Brand" required formControlName="assetBrand">
+                </div>
+            </div>
+
+                  <!-- Asset Model Field -->
+
+                  <div class="form-group row mb-3">
+                      <label for="assetmodel" class="col-md-2 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Asset Model</label>
+                      <div class="col-md-10">
+                          <input type="text" class="form-control" name="assetmodel" placeholder="Enter Asset Model" required formControlName="assetmodel">
+                      </div>
+                  </div>
+                
+
+                  <div class="col-md-10 offset-md-2 d-flex justify-content-center">
+                      <button type="submit" class="btn btn-primary" style="width: 120px; background-color: #18aedf; color: white; font-size: 17px;">Add</button>
+                  </div>
+
+              </form>
+          </div>
+  </div>
+</div>
+
+

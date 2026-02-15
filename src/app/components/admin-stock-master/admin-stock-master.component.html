@@ -1,0 +1,141 @@
+<div class="container adjust-width my-4">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div formGroupName="commonFields" class="card shadow-sm mb-4 p-3">
+      <div class="row g-3 align-items-center">
+        <div class="col-sm-6 col-md-4">
+          <label class="form-label">Material Category</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="materialCategory"
+            placeholder="Enter Material Category"
+          />
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+          <label class="form-label">Material Sub Category</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="materialSubCategory"
+            placeholder="Enter Material Sub Category"
+          />
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+          <label class="form-label">Brand</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="brand"
+            placeholder="Enter Brand"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="products">
+      <div
+        *ngFor="let product of products.controls; let i = index"
+        [formGroupName]="i"
+        class="card shadow-sm mb-4 p-3"
+      >
+        <h6>Product {{ i + 1 }}</h6>
+        <div class="row g-3">
+          <div class="col-sm-6 col-md-5">
+            <label class="form-label small">Model No.</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="modelNo"
+              placeholder="Enter Model No."
+            />
+          </div>
+
+          <div class="col-sm-6 col-md-5">
+            <label class="form-label small">Model Name</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="model"
+              placeholder="Enter Model Name"
+            />
+          </div>
+
+          <div class="col-sm-6 col-md-2 me-1">
+            <label class="form-label">Shape</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="shape"
+              placeholder="Enter Shape"
+            />
+          </div>
+
+          <div class="col-sm-3 col-md-2">
+            <label class="form-label small">Width</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="width"
+            />
+          </div>
+
+          <div class="col-sm-3 col-md-2">
+            <label class="form-label small">Length</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="length"
+            />
+          </div>
+
+          <div class="col-sm-3 col-md-2">
+            <label class="form-label small">Size</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="size"
+            />
+          </div>
+
+          <div class="col-sm-3 col-md-2">
+            <label class="form-label small">Thickness</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="thickness"
+            />
+          </div>
+        </div>
+
+        <div class="text-end mt-2">
+          <button
+            type="button"
+            class="btn btn-outline-danger btn-sm"
+            *ngIf="products.length > 1"
+            (click)="removeProduct(i)"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center my-3">
+      <div class="d-grid gap-2 d-md-flex justify-content-center">
+        <button
+          type="button"
+          class="btn btn-outline-success me-md-2 px-4"
+          (click)="addProduct()"
+        >
+          + Add More Product
+        </button>
+
+        <button type="submit" class="btn btn-primary px-4">
+          <i class="bi bi-send"></i> Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

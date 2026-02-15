@@ -1,0 +1,134 @@
+.dashboard-container {
+  position: relative;
+  top: 20px;
+}
+
+mat-icon {
+  color: #18aedf !important;
+}
+
+.mat-drawer.mat-drawer-side {
+  z-index: 2;
+}
+
+.mat_expand .mat-expansion-panel-body {
+    padding: 0 10px;
+}
+
+.mdc-list-item {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.content-expanded {
+  margin-left: 250px !important;
+  transition: margin-left 0.3s ease;
+  margin-top: 5px;
+  background-color: #f9f9f9;
+  padding: 15px;
+}
+
+.content-collapsed {
+  margin-left: 80px !important;
+  transition: margin-left 0.3s ease;
+  margin-top: 5px;
+  background-color: #f9f9f9;
+  padding: 15px;
+}
+
+.menu-text {
+  font-weight: 500;
+  margin-left: 10px;
+  color: #333;
+  font-size: 16px;
+}
+
+.menu-input {
+  display: block;
+  margin: 5px 0 10px 0px;
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.menu-input:focus {
+  outline: none;
+  border-color: #18aedf;
+  box-shadow: 0 0 4px rgba(24, 174, 223, 0.4);
+}
+
+.mat-list-item {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 16px;
+}
+
+mat-expansion-panel {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.menu-text {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateY(-6px);
+  margin-left: 10px;
+}
+
+.mat-expansion-panel-header {
+  background-color: transparent !important;
+  padding: 0px 5px;
+  height: 40px !important;
+}
+
+.example-sidenav-content {
+    overflow: auto;
+    height: -webkit-fill-available;
+}
+
+.example-sidenav-content::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.example-sidenav-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.example-sidenav-content::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+
+.example-sidenav-content::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+::ng-deep .mat_expand .mat-expansion-panel-body {
+    padding: 0 10px;
+}
+
+@media (max-width: 768px) {
+  .content-expanded {
+    margin-left: 200px !important;
+  }
+
+  .menu-input {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .content-expanded,
+  .content-collapsed {
+    margin-left: 0 !important;
+  }
+
+}

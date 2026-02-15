@@ -1,0 +1,39 @@
+.heading {
+    color: #18aedf;
+    font-size: clamp(20px, 4vw, 36px);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.aucformTitle {
+    background-color: #4caf50;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.services-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.services-list li {
+    cursor: default;
+    font-size: clamp(14px, 2.5vw, 20px);
+}
+
+.services-list li:hover {
+    color: #4caf50;
+}
+
+.login-form {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #f5f5f5;
+    padding: 20px;
+}
+
+.card:hover {
+    box-shadow: 0 0 20px rgba(24, 174, 223, 0.6);
+    transition: box-shadow 0.3s ease-in-out;
+}

@@ -1,0 +1,81 @@
+<div class="container main-container" *ngIf="!editMode">
+  <div class="card card-container">
+    <div class="card-header">
+      <h1 style="margin-bottom: 0rem;">My Services</h1>
+    </div>
+  </div>
+
+  <form [formGroup]="addServiceForm">
+    <div class="form-group mt-2 col-md-4">
+      <!-- <label for="subCategory">Select Service:</label> -->
+      <select id="subCategory" name="subCategory" class="form-control" formControlName="subCategory"
+        (change)="onServiceSelectionChange()">
+        <option value="" disabled selected>Select your service here</option>
+        <option *ngFor="let category of subCategories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+  </form>
+
+  <!-- table -->
+  <div class="table-container">
+
+    <table class="table table-bordered table-striped mt-3">
+      <div class="d-flex justify-content-center" *ngIf="bool">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <thead>
+        <tr>
+          <th scope="col">Srl._No.</th>
+          <th scope="col">USER_SERVICES_ID</th>
+          <th scope="col">SERVICE_TYPE</th>
+          <th scope="col">QUALIFICATION</th>
+          <th scope="col">EXPERIENCE</th>
+          <th scope="col">AVAILABLE_WITHIN_RANGE</th>
+          <th scope="col">LOCATION</th>
+          <th scope="col">CITY</th>
+          <th scope="col">EDIT</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let item of myServices | paginate: { itemsPerPage: itemsPerPage, currentPage: page }; let i = index">
+          <td>{{ i + 1 + (page - 1) * itemsPerPage }}</td>
+          <td style="cursor: pointer;" (click)="openDetails(item)">{{ item.userServicesId }}</td>
+          <td>{{ item.serviceType }}</td>
+          <td>{{ item.qualification }}</td>
+          <td>{{ item.experience }}</td>
+          <td>{{ item.availableWithinRange }}</td>
+          <td>{{ item.pincode }}</td>
+          <td>{{ item.city }}</td>
+          <td><button (click)="onEdit(item)">Edit</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <label for="recordsPerPage" class="pagination-text">Items Per Page:&nbsp;</label>
+          <select id="recordsPerPage" class="form-select" style="width: auto; display: inline-block;"
+            (change)="onRecordsPerPageChange($event)">
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+
+        </div>
+        <p class="pagination-text">Showing {{ myServices.length }} records</p>
+      </div>
+
+      <pagination-controls  class="pagination-text" style="margin-top: 0.4rem;" (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+<app-sp-update-service *ngIf="editMode" [data]="data" (back)="back($event)"></app-sp-update-service>

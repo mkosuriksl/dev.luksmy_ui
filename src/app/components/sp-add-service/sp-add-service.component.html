@@ -1,0 +1,77 @@
+<div class="form-and-services-container">
+  <!-- Add Service Form -->
+  <div class="form-container">
+    <h2 class="aucformTitle">Add Service</h2>
+    <div class="form-scrollable-container" cdkScrollable>
+      <form [formGroup]="addServiceForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="category">Service Category:</label>
+          <input type="text" id="qualification" name="qualification" class="form-control" [(ngModel)]="scategory"
+            formControlName="qualification" readonly />
+        </div>
+
+        <div class="form-group">
+          <label for="subCategory">Select Service:</label>
+          <select id="subCategory" class="form-control" formControlName="subCategory" (change)="onServiceSelectionChange()">
+            <option value="" disabled selected>Select your service</option>
+            <option *ngFor="let category of subCategories" [value]="category">{{ category }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="qualification">Qualification:</label>
+          <input type="text" id="qualification" class="form-control" placeholder="Enter Qualification" formControlName="qualification" />
+        </div>
+
+        <div class="form-group">
+          <label for="pincode">Pincode:</label>
+          <input type="number" id="pincode" class="form-control" placeholder="Enter Pincode" formControlName="pincode" />
+        </div>
+
+        <div class="form-group">
+          <label for="experience">Years of Experience:</label>
+          <input type="number" id="experience" class="form-control" placeholder="Enter Experience" formControlName="experience" />
+        </div>
+
+        <div class="form-group">
+          <label for="charges">Charges:</label>
+          <input type="text" id="charges" class="form-control" placeholder="Enter Charges" formControlName="charges" />
+        </div>
+
+        <div class="form-group">
+          <label>Available Out of Station:</label>
+          <div>
+            <input type="radio" id="availabilityYes" formControlName="availability" value="yes" /> 
+            <label for="availabilityYes">Yes</label>
+          </div>
+          <div>
+            <input type="radio" id="availabilityNo" formControlName="availability" value="no" /> 
+            <label for="availabilityNo">No</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Select Service Names -->
+  <div class="form-container" *ngIf="selectedCategoryServices.length > 0">
+    <h2 class="aucformTitle">Select Service Names</h2>
+    <div class="selected-services">
+      <label>Services for selected category:</label>
+      <div class="header">
+        <mat-checkbox [checked]="allSelected" [indeterminate]="selection.selected.length !== 0 && !allSelected" (change)="toggleMasterSelection()"></mat-checkbox>
+        <span>Select All</span>
+      </div>
+      <cdk-virtual-scroll-viewport itemSize="50" style="height: 300px;">
+        <mat-list>
+          <mat-list-item *cdkVirtualFor="let item of selectedCategoryServices">
+            <mat-checkbox [checked]="selection.isSelected(item)" (change)="selection.toggle(item)"></mat-checkbox>
+            {{ item.serviceName }}
+          </mat-list-item>
+        </mat-list>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </div>
+</div>

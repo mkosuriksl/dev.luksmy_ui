@@ -1,0 +1,200 @@
+<!-- <mat-toolbar color="primary">
+  <button mat-icon-button (click)="nav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <div class="logo">DASHBOARD</div>
+  <div class="extra"></div>
+  <mat-icon>share</mat-icon>
+  <mat-icon></mat-icon>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-wrapper">
+  <mat-sidenav opened #nav mode="side">
+    <a routerLink="/ec-dashboard/ec-dashboard-pannel" color="primary">
+      <button mat-button>
+        <mat-icon color="primary">dashboard</mat-icon>
+        <span>Dashboard</span>
+      </button>
+    </a>
+
+    <a routerLink="/ec-dashboard/update-profile" color="primary">
+      <button mat-button>
+        <mat-icon color="primary">person</mat-icon>
+        <span>Update Profile</span>
+      </button>
+    </a>
+
+    <a routerLink="/ec-dashboard/service-request" color="primary">
+      <button mat-button>
+        <mat-icon color="primary">assignment</mat-icon>
+        <span>Service Request</span>
+      </button>
+    </a>
+
+    <a routerLink="/ec-dashboard/ec-service-request" color="primary">
+      <button mat-button>
+        <mat-icon color="primary">list_alt</mat-icon>
+        <span>Show Service Request</span>
+      </button>
+    </a>
+
+    <a routerLink="/ec-dashboard/add-assets" color="primary">
+      <button mat-button>
+        <mat-icon color="primary">add</mat-icon>
+        <span>Add Assets</span>
+      </button>
+    </a>
+
+    <a routerLink="/ec-dashboard/edit-assets" color="primary">
+      <button mat-button>
+        <mat-icon color="primary">view_list</mat-icon>
+        <span >Show Assets</span>
+      </button>
+    </a>
+
+    <a routerLink="/ec-dashboard/reset-password" color="primary">
+      <button mat-button>
+        <mat-icon color="primary">vpn_key</mat-icon>
+        <span>Update Password</span>
+      </button>
+    </a>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<mat-drawer-container class="example-container mat-typography">
+  <mat-drawer #drawer mode="side" disableClose="true" opened="true">
+    <button
+      mat-mini-fab
+      (click)="isExpanded = !isExpanded"
+      color="warn"
+      style="margin: 10px"
+    >
+      <mat-icon aria-label="Menu" style="color: white">menu</mat-icon>
+    </button>
+
+    <mat-nav-list>
+      <mat-list-item>
+        <mat-icon routerLink="/ec-dashboard/ec-dashboard-pannel" color="primary"
+          >dashboard</mat-icon
+        >
+        <span
+          mat-line
+          *ngIf="isExpanded"
+          routerLink="/ec-dashboard/ec-dashboard-pannel"
+          class="menu-text"
+          >Dashboard</span
+        >
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon routerLink="/ec-dashboard/ec-profile">person</mat-icon>
+        <span mat-line
+              *ngIf="isExpanded"
+              routerLink="/ec-dashboard/ec-profile"
+              class="menu-text"
+              >My Profile</span>
+      </mat-list-item>
+
+      <!-- <mat-list-item>
+        <mat-icon color="primary" routerLink="/ec-dashboard/update-profile"
+          >person</mat-icon
+        >
+        <span
+          mat-line
+          *ngIf="isExpanded"
+          routerLink="/ec-dashboard/update-profile"
+          class="menu-text"
+          >Update Profile</span
+        >
+      </mat-list-item> -->
+
+      <mat-list-item>
+        <mat-icon color="primary" routerLink="/ec-dashboard/service-request"
+          >assignment</mat-icon
+        >
+        <span
+          mat-line
+          *ngIf="isExpanded"
+          routerLink="/ec-dashboard/service-request"
+          class="menu-text"
+          > Submit Service Request</span
+        >
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-icon
+          color="primary"
+          style="margin-right: 8px"
+          routerLink="/ec-dashboard/ec-service-request"
+          >list_alt</mat-icon
+        >
+        <span
+          mat-line
+          *ngIf="isExpanded"
+          routerLink="/ec-dashboard/ec-service-request"
+          class="menu-text"
+          >Show Service Request</span
+        >
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-icon color="primary" routerLink="/ec-dashboard/add-assets"
+          >add</mat-icon
+        >
+        <span
+          mat-line
+          *ngIf="isExpanded"
+          routerLink="/ec-dashboard/add-assets"
+          class="menu-text"
+          >Add Machine</span
+        >
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-icon color="primary" routerLink="/ec-dashboard/edit-assets"
+          >view_list</mat-icon
+        >
+        <span
+          mat-line
+          *ngIf="isExpanded"
+          routerLink="/ec-dashboard/edit-assets"
+          class="menu-text"
+          >Show Machine</span
+        >
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon color="primary" routerLink="/ec-dashboard/show-rental"
+          >view_list</mat-icon
+        >
+        <span
+          mat-line
+          *ngIf="isExpanded"
+          routerLink="/ec-dashboard/show-rental"
+          class="menu-text"
+          >Show Rental</span
+        >
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-icon routerLink="/ec-dashboard/reset-password"
+          >vpn_key</mat-icon
+        >
+        <span
+          mat-line
+          *ngIf="isExpanded"
+          routerLink="/ec-dashboard/reset-password"
+          color="primary"
+          class="menu-text"
+          >Update Password</span
+        >
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

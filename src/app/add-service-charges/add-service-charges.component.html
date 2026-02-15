@@ -1,0 +1,119 @@
+
+<div class="form-and-services-container d-flex">
+
+
+    <div class="form-container">
+            <div class="auctionFormRight" style="margin-top: 0px;">
+                <h3 class="aucformTitle text-center">Add Service Charges</h3>
+                <form [formGroup]="addAssetsForm" (ngSubmit)="addAssetsSubmit()">
+                  <div class="form-group row mb-3">
+                    <label for="city" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Service Category</label>
+                    <div class="col-md-8">
+                        <input type="text" readonly class="form-control" [(ngModel)]="serviceCategory" formControlName="serviceCategory">
+                    </div>
+                </div>
+                  <!-- Assets Sub-Category -->
+                  <!-- <div class="form-group row mb-3">
+                    <label for="serviceId" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">ServiceId</label>
+                    <div class="col-md-8">
+                        
+                        <select id="serviceId" class="form-control" [(ngModel)]="selectedServiecId" placeholder="select serviceId" formControlName="serviceId">
+                          <option value="" disabled selected>Select ServiceID</option>
+                          <option *ngFor="let assetServiceId of sserviceId" [value]="assetServiceId">{{ assetServiceId }}</option>
+                        </select>       
+                      
+                    </div>
+                </div> -->
+                <div class="form-group row mb-3">
+                  <label for="subcategory" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Service Sub-Category</label>
+                  <div class="col-md-8">
+                      <!-- <input class="form-control" name="assetsSubCategory" placeholder="Enter Your assetssubCategory" formControlName="assetsSubCategory"> -->
+                      <select id="subcategory" class="form-control"  (change)="onServiceSelectionChange($event)" [(ngModel)]="selectedAssetSubCat" placeholder="ALL" formControlName="subcategory">
+                        <option value="" disabled selected>Select</option>
+                        <option *ngFor="let assetSubCat of assetSubCats" [value]="assetSubCat">{{ assetSubCat }}</option>
+                      </select>       
+                    
+                  </div>
+              </div>
+                <div class="form-group row mb-3">
+                  <label for="assetBrand" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Service Brand</label>
+                  <div class="col-md-8">
+                      <!-- <input type="text" class="form-control" name="assetBrand" placeholder="Enter Your assetBrand" required formControlName="assetBrand"> -->
+                      <select id="brand" class="form-control" [(ngModel)]="selectedAssetBrand" placeholder="ALL" required formControlName="brand">
+                          <option value="" disabled selected>Select</option>
+                          <option *ngFor="let assetBrand of assetBrands" [value]="assetBrand">{{ assetBrand }}</option>
+                        </select>
+                  </div>
+                </div>
+                <div class="form-group row mb-3">
+                  <label for="assetModel" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Service Model</label>
+                  <div class="col-md-8">
+                      <!-- <input type="text" class="form-control" name="assetModel" placeholder="Enter Your assetModel" required formControlName="assetModel"> -->
+                      <select id="model" class="form-control" [(ngModel)]="selectedAssetModel" placeholder="ALL" required formControlName="model">
+                          <option value="" disabled selected>Select</option>
+                          <option *ngFor="let assetModel of assetModels" [value]="assetModel">{{ assetModel }}</option>
+                        </select>
+                  </div>
+                </div>
+  
+                    <!-- Location Field -->
+  
+                    <div class="form-group row mb-3">
+                        <label for="city" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Location</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="location" placeholder="Enter Your Location" required formControlName="location" #placesRef="ngx-places" ngx-gp-autocomplete [options]='options' (onAddressChange)="handleAddressChange($event)">
+                        </div>
+                    </div>
+  
+                    <!-- Street Field -->
+  
+                    <!-- <div class="form-group row mb-3">
+                        <label for="serviceCharge" class="col-md-4 control-label" style="font-size: 17px; color: #020202; font-family: sans-serif;">Service Charge</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="serviceCharge" placeholder="Enter Service Charge" required formControlName="serviceCharge">
+                        </div>
+                    </div> -->
+  
+                   
+                        <div class="col-md-8 offset-md-2 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary" style="width: 120px; background-color: #18aedf; color: white; font-size: 17px;">Add</button>
+                        </div>
+  
+                </form>
+            </div>
+    </div>
+    <div class="form-container" *ngIf="selectedCategoryServices.length > 0">
+      <h2 class="aucformTitle text-center">Select Service Names</h2>
+      <div class="selected-services" *ngIf="selectedCategoryServices.length > 0">
+        <label>Services for selected category:</label>
+        <div class="header">
+           <mat-checkbox [checked]="allSelected"
+           [indeterminate]="selection.selected.length !== 0 && !allSelected"
+           (change)="toggleMasterSelection()"
+           ></mat-checkbox>
+          <span>
+            Select All
+          </span>
+        </div>
+          <cdk-virtual-scroll-viewport  itemSize="50"  style="height: 100vh;">
+            <mat-list>
+              <mat-list-item *cdkVirtualFor="let item of selectedCategoryServices">
+                <div class="row">
+                  <div class="col-6">
+                <mat-checkbox [checked]="selection.isSelected(item)" (change)="selectService(item)"></mat-checkbox>
+                  {{item.serviceName}}
+                  </div>
+                  <div class="col-6">
+                  <input placeholder=" Enter Service Charge" *ngIf="selection.isSelected(item)" (input)="addCharges($event,item)"/>
+                  </div>
+                </div>
+              </mat-list-item>
+          </mat-list>
+          </cdk-virtual-scroll-viewport>
+    
+      </div>
+    
+    </div>
+  </div>
+  
+  

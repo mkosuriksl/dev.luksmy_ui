@@ -1,0 +1,138 @@
+
+
+<div class="container main-container" *ngIf="!editMode &&!rental">
+  <div class="card card-container">
+      <div class="card-header">
+          <h1 style="margin-bottom: 0rem;">Machine Data</h1>
+      </div>
+      <div class="card-body border-right-primary border-left-primary">
+        <form [formGroup]="serviceRequestForm" >
+            <div class="form-row">
+                  <div class="col-md-3 form-group">
+                    <label for="assetCat" style="color: blue;">Machine Category</label>
+                    <input type="text" class="form-control" id="assetCat" name="assetCat" readonly formControlName="assetCat" >
+                    <!-- <select id="assetCat" class="form-control" [(ngModel)]="selectedAssetCat"  formControlName="assetsCategory">
+                      <option value="" disabled selected>Select Asset Category</option>
+                      <option *ngFor="let assetCat of assetCats" [value]="assetCat">{{ assetCat }}</option>
+                    </select> -->
+                  </div>
+                   <div class="col-md-3 form-group">
+                    <label for="assetSubCat" style="color: blue;">Machine SubCategory</label>
+                    <select class="form-control" id="assetSubCat" formControlName="assetSubCat">
+                      <option value="" disabled selected>Select subcategory </option>
+                      <option *ngFor="let category of assetSubCats" [value]="category">{{ category }}</option>
+                    </select>
+                   </div>
+               
+                <div class="col-md-3 form-group">
+                    <label for="location" style="color: blue;">Location</label>
+                    <input type="text" class="form-control" id="field3" name="field3" formControlName="location" #placesRef="ngx-places" ngx-gp-autocomplete [options]='options' (onAddressChange)="handleAddressChange($event)">
+                </div>
+               
+                <div class="col-md-3 form-group">
+                  <label for="assetId" style="color: blue;">Machine ID
+                  </label>
+                  <input type="text" class="form-control" id="assetId" name="assetId" formControlName="assetId" >
+              
+                </div>
+                <div class="col-md-3 form-group">
+                  <label for="assetModel" style="color: blue;">Machine Model</label>
+                  <!-- <input type="text" class="form-control" id="assetModel" name="assetModel" formControlName="assetModel" > -->
+                  <select id="assetModel" class="form-control" [(ngModel)]="selectedAssetModel" placeholder="select assetModel" required formControlName="assetModel">
+                    <option value="" disabled selected>Select Asset Model</option>
+                    <option *ngFor="let assetModel of assetModels" [value]="assetModel">{{ assetModel }}</option>
+                  </select>
+                </div>
+                <div class="col-md-3 form-group">
+                  <label for="assetBrand" style="color: blue;">Machine Brand</label>
+                  <!-- <input type="text" class="form-control" id="assetBrand" name="assetBrand" formControlName="assetBrand" > -->
+                  <select id="assetBrand" class="form-control" [(ngModel)]="selectedAssetBrand" placeholder="select  assetBrand" required formControlName="assetBrand">
+                    <option value="" disabled selected>Select Asset Brand</option>
+                    <option *ngFor="let assetBrand of assetBrands" [value]="assetBrand">{{ assetBrand }}</option>
+                  </select>
+                </div>
+
+                
+              
+
+              
+            </div>  
+
+            <div class="form-row mt-3">
+              <div class="col-md-12 text-center">
+                  <button type="submit" class="btn btn-primary" (click)="search()">Search</button>
+              </div>
+          </div>
+        </form>
+    </div>
+  </div>
+   <!-- table -->
+   <div class="table-container">
+
+  <table class="table table-bordered table-striped mt-3">
+   <thead>
+    <tr>
+       <th scope="col">Asset._Id.</th>
+       <th scope="col">Category</th>
+       <th scope="col">Sub-Category</th>
+       <th scope="col">Asset Model</th>
+       <th scope="col">Location</th>
+       <th scope="col">Street</th>
+       <th scope="col">Door_no</th>
+       <th scope="col">Town</th>
+       <th scope="col">District</th>
+       <th scope="col">State</th>
+       <th scope="col">Pin_code</th>
+       <th scope="col">Edit</th>
+      <th scope="col">Rental</th>
+    </tr>
+   </thead>
+<tbody>
+<!-- Add table data here -->
+<tr *ngFor="let item of assetData | paginate: { itemsPerPage: itemsPerPage, currentPage: page }; let i = index">
+  <td>{{ item.assetId}}</td>
+  <td>{{ item.assetCat}}</td>
+  <td>{{ item.assetSubCat}}</td>
+  <td>{{item.assetModel}}</td>
+  <td>{{ item.location }}</td>
+  <td>{{ item.street }}</td>
+  <td>{{ item.doorNo }}</td>
+  <td>{{ item.town}}</td>
+  <td>{{ item.district }}</td>
+  <td>{{ item.state }}</td>
+  <td>{{ item.pinCode}}</td>
+  <td>
+    <button class="btn btn-primary" (click)="editAsset(item)">Edit</button>
+  </td>
+  <td >
+    <button class="btn btn-primary" (click)="addRental(item)">Rental</button>
+  </td>
+
+</tr>
+</tbody>
+
+      </table>
+
+      <div class="pagination">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <label for="recordsPerPage" class="pagination-text">Items Per Page:&nbsp;</label>
+            <select id="recordsPerPage" class="form-select" style="width: auto; display: inline-block;"
+              (change)="onRecordsPerPageChange($event)">
+              <option value="5" selected>5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+            </select>
+  
+          </div>
+          <p class="pagination-text">Showing {{ assetData.length }} records</p>
+        </div>
+  
+        <pagination-controls  class="pagination-text" (pageChange)="page = $event"  style="margin-top: 0.4rem;"></pagination-controls>
+      </div>
+
+   </div>
+</div>
+<app-edit-assets-page [data]="selected" *ngIf="editMode" (back)="back($event)"></app-edit-assets-page>
+<app-add-sp-rental *ngIf="rental" [data]="selected"  (back)="back($event)"></app-add-sp-rental>

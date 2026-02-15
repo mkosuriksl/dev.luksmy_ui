@@ -1,0 +1,108 @@
+
+.example-container {
+  height: 135%;
+  position: relative;
+  margin-top: -5rem;
+}
+
+.mat-sidenav {
+  padding: 20px;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+
+mat-icon {
+  color: #18aedf !important;
+}
+
+.container {
+  position: relative;
+  top: 55px;
+}
+
+.mat-drawer.mat-drawer-side {
+  z-index: 2;
+  top: 65px;
+}
+
+.content-expanded {
+  margin-left: 300px !important;
+  transition: margin-left 0.3s ease;
+  margin-top: 65px;
+  background-color: #f0f0f0;
+}
+
+.content-collapsed {
+  margin-top: 65px;
+  transition: margin-left 0.3s ease;
+  background-color: #f0f0f0;
+  margin-left: 80px !important;
+}
+
+.menu-text {
+  display: inline-block;
+  vertical-align: middle; 
+  transform: translateY(-6px); 
+  margin-left: 10px;
+}
+
+
+.mat-list-item {
+  display: flex;
+  align-items: center;
+  border: none !important;
+  padding: 8px 0;
+}
+
+mat-icon.mat-list-icon {
+  margin-left: 15px !important; 
+  margin-right: 10px !important;
+  vertical-align: middle;
+  transform: translateY(2px);
+}
+
+mat-expansion-panel {
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+.mat-expansion-panel-header {
+  border: none !important;
+  background-color: transparent !important;
+  padding: 10px 16px; 
+  margin-bottom: -10px; 
+}
+
+.mat-expansion-panel-header .mat-expansion-panel-header-title {
+  display: flex;
+  align-items: center;
+}
+
+.mat-expansion-panel-header .mat-expansion-indicator {
+  margin-left: 10px !important; 
+  margin-right: 5px !important; 
+}
+
+.mat-expansion-panel-content {
+  padding: 0 !important;
+}
+
+.mat-dropdown-trigger, .mat-menu {
+  border: none !important;
+  box-shadow: none !important;
+}
+::ng-deep .mat-expansion-panel-header .mat-expansion-indicator {
+  transform: translateY(-10px) !important;  
+  transition: transform 0.2s ease, rotate 0.2s ease;  
+}
+
+::ng-deep .mat-expansion-panel[expanded] .mat-expansion-indicator {
+  transform: translateY(-10px) rotate(180deg) !important;  
+}
+
+::ng-deep .mat-expansion-panel:not([expanded]) .mat-expansion-indicator {
+  transform: translateY(-5px) rotate(0deg) !important;  
+}

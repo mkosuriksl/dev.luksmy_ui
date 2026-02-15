@@ -1,0 +1,50 @@
+
+<div class="container main-container">
+  <div class="card card-container" style="height:270px">
+    <div class="card-header">
+      <h1>Api Url</h1>
+
+    </div>
+<div class="card-body">
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-primary my-3" *ngIf="!edit && !add" (click)="addNew()">Add New</button>
+  </div>
+  <div class="d-flex justify-content-between" *ngIf="edit||add">
+  
+    <input class="form-control w-25" placeholder="systemId" readonly [(ngModel)]="systemId">
+    <input class="form-control w-50" [(ngModel)]="old" readonly *ngIf="edit">
+    <input class="form-control w-50" [(ngModel)]="new" placeholder="Enter Api Base Url">
+  <button class="btn btn-primary" (click)="save()">Save</button>
+</div>
+<div class="table-container" *ngIf="!edit && !add">
+  <table class="table table-bordered table-striped mt-3">
+   
+    <thead>
+      <tr>
+        <th>System Id</th>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr *ngFor="let item of items">
+        <td>{{ item.id.systemId }}</td>
+        <td>{{ item.id.ipUrlToUi }}</td>
+        <td><button class="btn btn-primary" (click)="updateApi(item.id)">edit</button></td>
+     
+        
+      </tr>
+    </tbody>
+  </table>
+ 
+</div>
+</div>
+   
+  </div>
+ 
+    
+     
+   
+  </div>
+

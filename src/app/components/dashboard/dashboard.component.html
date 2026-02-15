@@ -1,0 +1,160 @@
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <mat-drawer-container class="sidebar-container mat-typography">
+    <mat-drawer
+      #drawer
+      mode="side"
+      disableClose="true"
+      [opened]="true"
+      class="sidebar-drawer"
+    >
+      <button
+        mat-mini-fab
+        color="primary"
+        (click)="isExpanded = !isExpanded"
+        class="toggle-btn"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <mat-nav-list>
+        <mat-list-item routerLink="/dashboard/dashboard-pannel">
+          <mat-icon>dashboard</mat-icon>
+          <span mat-line *ngIf="isExpanded" class="menu-text ms-2"
+            >Dashboard</span
+          >
+        </mat-list-item>
+
+        <mat-expansion-panel
+          [expanded]="adminExpanded"
+          (opened)="adminExpanded = true"
+          (closed)="adminExpanded = false"
+          class="mat_expand"
+        >
+          <mat-expansion-panel-header>
+            <mat-icon>admin_panel_settings</mat-icon>
+            <span class="ms-2" *ngIf="isExpanded">
+              <h3 class="m-0">Admin</h3>
+            </span>
+          </mat-expansion-panel-header>
+
+          <mat-nav-list class="p-0">
+            <mat-list-item routerLink="service-person-page">
+              <mat-icon>engineering</mat-icon>
+              <span *ngIf="isExpanded" class="menu-text ms-2">
+                Service Person
+              </span>
+            </mat-list-item>
+
+            <mat-list-item routerLink="service-request-page">
+              <mat-icon>support_agent</mat-icon>
+              <span *ngIf="isExpanded" class="menu-text ms-2"
+                >Service Request</span
+              >
+            </mat-list-item>
+
+            <mat-list-item routerLink="add-asset-categories">
+              <mat-icon>playlist_add</mat-icon>
+              <span *ngIf="isExpanded" class="menu-text ms-2"
+                >Add Asset Categories</span
+              >
+            </mat-list-item>
+
+            <mat-list-item routerLink="show-asset-categories">
+              <mat-icon>list_alt</mat-icon>
+              <span *ngIf="isExpanded" class="menu-text ms-2"
+                >Show Asset Categories</span
+              >
+            </mat-list-item>
+
+            <mat-list-item routerLink="add-service-category">
+              <mat-icon>add_box</mat-icon>
+              <span *ngIf="isExpanded" class="menu-text ms-2"
+                >Add Service Categories</span
+              >
+            </mat-list-item>
+
+            <mat-list-item routerLink="show-service-category">
+              <mat-icon>category</mat-icon>
+              <span *ngIf="isExpanded" class="menu-text ms-2"
+                >Show Service Categories</span
+              >
+            </mat-list-item>
+
+            <mat-expansion-panel class="mat_expand" [expanded]="isExpanded">
+              <mat-expansion-panel-header>
+                <mat-icon>build</mat-icon>
+                <span class="mx-2" *ngIf="isExpanded">
+                  <h3 class="m-0">Material Master</h3>
+                </span>
+              </mat-expansion-panel-header>
+
+              <mat-list-item routerLink="/dashboard/admin-stock-master">
+                <mat-icon>add_circle</mat-icon>
+                <span mat-line *ngIf="isExpanded" class="menu-text">
+                  Add Material
+                </span>
+              </mat-list-item>
+
+              <mat-list-item routerLink="/dashboard/admin-show-master">
+                <mat-icon>visibility</mat-icon>
+                <span mat-line *ngIf="isExpanded" class="menu-text">
+                  Show Material
+                </span>
+              </mat-list-item>
+
+              <mat-list-item routerLink="/dashboard/admin-update-master">
+                <mat-icon>update</mat-icon>
+                <span mat-line *ngIf="isExpanded" class="menu-text">
+                  Update Master
+                </span>
+              </mat-list-item>
+            </mat-expansion-panel>
+
+            <mat-list-item routerLink="/dashboard/admin-service-name">
+              <mat-icon>add_circle</mat-icon>
+              <span *ngIf="isExpanded" class="menu-text ms-2"
+                >Add Service Name</span
+              >
+            </mat-list-item>
+
+            <mat-list-item routerLink="show-service-names">
+              <mat-icon>list</mat-icon>
+              <span *ngIf="isExpanded" class="menu-text ms-2"
+                >Show Service Names</span
+              >
+            </mat-list-item>
+
+            <mat-list-item routerLink="customer-report">
+              <mat-icon>description</mat-icon>
+              <span *ngIf="isExpanded" class="menu-text ms-2"
+                >Customer Report</span
+              >
+            </mat-list-item>
+
+            <mat-list-item routerLink="show-service-charge">
+              <mat-icon>monetization_on</mat-icon>
+              <span *ngIf="isExpanded" class="menu-text ms-2"
+                >Show Service Charge</span
+              >
+            </mat-list-item>
+
+            <mat-list-item routerLink="apiUrl">
+              <mat-icon>link</mat-icon>
+              <span *ngIf="isExpanded" class="menu-text ms-2">API URL</span>
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-nav-list>
+    </mat-drawer>
+
+    <mat-drawer-content
+      [ngClass]="isExpanded ? 'content-expanded' : 'content-collapsed'"
+    >
+      <div class="main-content body col-12 m-0">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+</div>

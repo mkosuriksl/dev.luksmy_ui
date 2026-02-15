@@ -1,0 +1,9 @@
+<div class="container-fluid box" *ngIf="isPopupOpen">
+    <h3>Delete Account</h3>
+    <span>Are you sure you want to delete your account?</span>
+    <div class="d-flex justify-content-end my-3">
+      <button class="btn btn-primary mx-2" (click)="delete()">Yes</button>
+      <button class="btn btn-danger mx-2" (click)="close()">No</button>
+    </div>
+  </div>
+  

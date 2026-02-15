@@ -1,0 +1,430 @@
+<div class="container-fluid py-2">
+  <div class="card shadow-sm rounded-4 border-0">
+    <div
+      class="card-header bg-primary text-white d-flex justify-content-between align-items-center rounded-top-4"
+    >
+      <h4 class="mb-0 fw-semibold">Quotation Report</h4>
+      <i
+        class="fa fa-filter filter-toggle-icon"
+        (click)="toggleFilter()"
+        title="Toggle Filters"
+        style="cursor: pointer"
+      ></i>
+    </div>
+    <div class="card-body" *ngIf="showFilter">
+      <form
+        [formGroup]="materialRequestForm"
+        (ngSubmit)="search()"
+        class="p-3 rounded-3"
+        style="background: #f1f3f5"
+      >
+        <div class="row g-3">
+          <!-- Material Category -->
+          <div class="col-12 col-md-3">
+            <label class="form-label fw-medium text-primary">
+              Material Category
+            </label>
+            <select
+              class="form-select rounded-3"
+              formControlName="materialCategory"
+              (change)="onCategoryChange($event)"
+            >
+              <option value="">All Category</option>
+              <option *ngFor="let cat of categories" [value]="cat.category">
+                {{ cat.category }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Material Sub Category -->
+          <div class="col-12 col-md-3">
+            <label class="form-label fw-medium text-primary">
+              Material Sub Category
+            </label>
+            <select
+              class="form-select rounded-3"
+              formControlName="materialSubCategory"
+              (change)="onSubCategoryChange($event)"
+            >
+              <option value="">Select Subcategory</option>
+              <option *ngFor="let sub of subCategories" [value]="sub">
+                {{ sub }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Brand -->
+          <div class="col-12 col-md-3">
+            <label class="form-label fw-medium text-primary">Brand</label>
+            <select class="form-select rounded-3" formControlName="brand">
+              <option value="">Select Brand</option>
+              <option *ngFor="let b of brands" [value]="b">{{ b }}</option>
+            </select>
+          </div>
+
+          <!-- User Mobile -->
+          <div class="col-12 col-md-3">
+            <label class="form-label text-primary">User Mobile</label>
+            <input
+              type="text"
+              class="form-control rounded-3"
+              formControlName="userMobile"
+              placeholder="Enter User Mobile"
+            />
+          </div>
+
+          <!-- From Quoted Date -->
+          <div class="col-12 col-md-3">
+            <label class="form-label text-primary">From Quoted Date</label>
+            <input
+              type="date"
+              class="form-control rounded-3"
+              formControlName="fromQuotedDate"
+            />
+          </div>
+
+          <!-- To Quoted Date -->
+          <div class="col-12 col-md-3">
+            <label class="form-label text-primary">To Quoted Date</label>
+            <input
+              type="date"
+              class="form-control rounded-3"
+              formControlName="toQuotedDate"
+            />
+          </div>
+
+          <!-- Supplier ID -->
+          <div class="col-12 col-md-3">
+            <label class="form-label text-primary">Supplier ID</label>
+            <input
+              type="text"
+              class="form-control rounded-3"
+              formControlName="supplierId"
+              placeholder="Enter Supplier ID"
+            />
+          </div>
+
+          <!-- CMAT Request ID -->
+          <div class="col-12 col-md-3">
+            <label class="form-label text-primary">CMAT Request ID</label>
+            <input
+              type="text"
+              class="form-control rounded-3"
+              formControlName="cmatRequestId"
+              placeholder="Enter CMAT Request ID"
+            />
+          </div>
+
+          <!-- Quotation Status -->
+          <div class="col-12 col-md-3">
+            <label class="form-label text-primary">Quotation Status</label>
+            <select class="form-select rounded-3" formControlName="status">
+              <option value="">Select Status</option>
+              <option value="ACTIVE">ACTIVE</option>
+              <option value="INACTIVE">INACTIVE</option>
+              <option value="DEACTIVATED">DEACTIVATED</option>
+              <option value="QUOTED">QUOTED</option>
+              <option value="NEW">NEW</option>
+              <option value="PENDING">PENDING</option>
+              <option value="IN_PROGRESS">IN_PROGRESS</option>
+              <option value="COMPLETED">COMPLETED</option>
+              <option value="INVOICED">INVOICED</option>
+              <option value="CANCELED">CANCELED</option>
+              <option value="APPROVED">APPROVED</option>
+            </select>
+          </div>
+
+          <!-- Search Button -->
+          <div class="col-12 d-flex justify-content-end pt-2">
+            <button
+              type="submit"
+              class="btn btn-primary px-5 fw-semibold rounded-pill"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr class="m-0" />
+  <div class="mt-3">
+    <div class="d-flex justify-content-center my-3" *ngIf="bool">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <ng-container *ngIf="!bool && tableData.length > 0; else noDataTemplate">
+      <div
+        class="table-responsive shadow-sm rounded-3 border"
+        style="max-height: 300px; overflow-y: auto"
+      >
+        <table class="table table-hover align-middle text-center mb-0">
+          <thead class="table-dark sticky-top">
+            <tr>
+              <th scope="col">Quotation ID</th>
+              <th scope="col">Request ID</th>
+              <th scope="col">Quoted Amount</th>
+              <th scope="col">Quoted Date</th>
+              <th scope="col">Invoice Date</th>
+              <th scope="col">Invoice Number</th>
+              <th scope="col">Invoice Status</th>
+              <th scope="col">Quotation Status</th>
+              <th scope="col">Updated Date</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of pagedData">
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-link text-decoration-none p-0 fw-semibold"
+                  (click)="openQuotationDetails(item)"
+                >
+                  {{ item.quotationId || "-" }}
+                </button>
+              </td>
+              <td>{{ item.cmatRequestId || "-" }}</td>
+              <td>{{ item.quotedAmount || 0 }}</td>
+              <td>{{ item.quotedDate | date : "dd/MM/yyyy" }}</td>
+              <td>{{ item.invoiceDate | date : "dd/MM/yyyy" }}</td>
+              <td>{{ item.invoiceNumber || "-" }}</td>
+              <td>
+                <span
+                  class="badge px-3 py-2"
+                  [ngClass]="{
+                    'bg-success':
+                      item.invoiceStatus?.toUpperCase().trim() === 'INVOICED',
+                    'bg-warning text-dark':
+                      item.invoiceStatus?.toUpperCase().trim() === 'PENDING',
+                    'bg-secondary': !item.invoiceStatus
+                  }"
+                >
+                  {{ item.invoiceStatus || "-" }}
+                </span>
+              </td>
+              <td>
+                <span
+                  class="badge px-3 py-2"
+                  [ngClass]="{
+                    'bg-success':
+                      item.quotationStatus?.toUpperCase().trim() === 'QUOTED',
+                    'bg-primary':
+                      item.quotationStatus?.toUpperCase().trim() === 'APPROVED',
+                    'bg-danger':
+                      item.quotationStatus?.toUpperCase().trim() === 'REJECTED',
+                    'bg-secondary': !item.quotationStatus
+                  }"
+                >
+                  {{ item.quotationStatus || "-" }}
+                </span>
+              </td>
+
+              <td>{{ item.updatedDate | date : "dd/MM/yyyy" }}</td>
+              <td>
+                <button
+                  class="btn btn-sm btn-success rounded-pill px-3"
+                  (click)="generateInvoice(item)"
+                  [disabled]="
+                    item.invoiceStatus?.toUpperCase().trim() === 'INVOICED' ||
+                    bool
+                  "
+                >
+                  {{ bool ? "Processing..." : "Generate" }}
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="!pagedData.length">
+              <td colspan="9" class="text-muted py-3">No records found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-md-none mt-3">
+        <div
+          *ngFor="let item of pagedData"
+          class="card border-0 shadow-sm mb-3 rounded-3"
+        >
+          <div class="card-body">
+            <h6 class="card-title fw-semibold mb-2">
+              Quotation ID:
+              <button
+                type="button"
+                class="btn btn-link text-decoration-none p-0"
+                (click)="openQuotationDetails(item)"
+              >
+                {{ item.quotationId || "-" }}
+              </button>
+            </h6>
+            <div class="small text-muted">
+              <p class="mb-1">
+                <strong>Quoted Amount:</strong> {{ item.quotedAmount || 0 }}
+              </p>
+              <p class="mb-1">
+                <strong>Quoted Date:</strong>
+                {{ item.quotedDate | date : "dd/MM/yyyy" }}
+              </p>
+              <p class="mb-1">
+                <strong>Invoice Number:</strong> {{ item.invoiceNumber || "-" }}
+              </p>
+              <p class="mb-1">
+                <strong>Invoice Status:</strong> {{ item.invoiceStatus || "-" }}
+              </p>
+              <p class="mb-1">
+                <strong>Quotation Status:</strong>
+                {{ item.quotationStatus || "-" }}
+              </p>
+              <p class="mb-1">
+                <strong>Updated:</strong>
+                {{ item.updatedDate | date : "dd/MM/yyyy" }}
+              </p>
+            </div>
+            <div class="mt-3 text-end">
+              <button
+                class="btn btn-sm btn-success rounded-pill px-3"
+                (click)="generateInvoice(item)"
+                [disabled]="
+                  item.invoiceStatus?.toUpperCase().trim() === 'INVOICED' ||
+                  bool
+                "
+              >
+                {{ bool ? "Processing..." : "Generate Invoice" }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #noDataTemplate>
+      <div class="text-center mt-3 text-muted">No material requests found.</div>
+    </ng-template>
+    <div
+      *ngIf="tableData.length > 0"
+      class="d-flex justify-content-between align-items-center mt-3 px-3 pb-3 flex-wrap"
+    >
+      <div class="d-flex align-items-center mb-2 mb-md-0">
+        <label for="recordsPerPage" class="me-2 fw-semibold"
+          >Items Per Page:</label
+        >
+        <select
+          id="recordsPerPage"
+          class="form-select form-select-sm w-auto"
+          (change)="onRecordsPerPageChange($event)"
+        >
+          <option value="5" [selected]="itemsPerPage === 5">5</option>
+          <option value="10" [selected]="itemsPerPage === 10">10</option>
+          <option value="15" [selected]="itemsPerPage === 15">15</option>
+          <option value="20" [selected]="itemsPerPage === 20">20</option>
+        </select>
+      </div>
+      <div class="d-flex align-items-center">
+        <p class="mb-0 me-3"><strong>Total:</strong> {{ totalLength }}</p>
+        <nav>
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item" [class.disabled]="page === 1">
+              <a class="page-link" (click)="onPageChange(page - 1)">Prev</a>
+            </li>
+
+            <li
+              class="page-item"
+              *ngFor="let p of [].constructor(totalPages); let i = index"
+              [class.active]="i + 1 === page"
+            >
+              <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+            </li>
+
+            <li class="page-item" [class.disabled]="page >= totalPages">
+              <a class="page-link" (click)="onPageChange(page + 1)">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade show d-block"
+  tabindex="-1"
+  *ngIf="isQuotationModalOpen"
+  style="background: rgba(0, 0, 0, 0.5)"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"
+    style="max-width: 90%"
+  >
+    <div class="modal-content">
+      <div class="modal-header bg-light border-bottom">
+        <h5 class="modal-title fw-semibold text-primary">
+          <i class="bi bi-file-earmark-text me-2"></i>
+          Quotation Details -
+          <span class="text-dark">{{ selectedQuotationId }}</span>
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="closeQuotationModal()"
+        ></button>
+      </div>
+      <div class="modal-body p-0" style="max-height: 500px; overflow-y: auto">
+        <table
+          class="table table-bordered table-striped table-hover text-center mb-0"
+        >
+          <thead class="table-light position-sticky top-0" style="z-index: 10">
+            <tr>
+              <th>Material Line Item</th>
+              <th>Quotation ID</th>
+              <th>CMAT Request ID</th>
+              <th>Quoted Amount</th>
+              <th>MRP</th>
+              <th>Discount</th>
+              <th>GST</th>
+              <th>Invoice Number</th>
+              <th>Invoice Date</th>
+              <th>Invoice Status</th>
+              <th>Quotation Status</th>
+              <th>Quoted Date</th>
+              <th>Updated Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody
+            *ngIf="quotationDetails.materialSuppliers?.length; else noData"
+          >
+            <tr *ngFor="let m of quotationDetails.materialSuppliers">
+              <td>{{ m.materialLineItem }}</td>
+              <td>{{ m.quotationId }}</td>
+              <td>{{ m.cmatRequestId }}</td>
+              <td>{{ m.quotedAmount }}</td>
+              <td>{{ m.mrp }}</td>
+              <td>{{ m.discount }}</td>
+              <td>{{ m.gst }}</td>
+              <td>{{ m.invoiceNumber }}</td>
+              <td>{{ m.invoiceDate | date : "shortDate" }}</td>
+              <td>{{ m.invoiceStatus }}</td>
+              <td>{{ m.quotationStatus }}</td>
+              <td>{{ m.quotedDate | date : "shortDate" }}</td>
+              <td>{{ m.updatedDate | date : "shortDate" }}</td>
+              <td>{{ m.status }}</td>
+            </tr>
+          </tbody>
+
+          <ng-template #noData>
+            <tr>
+              <td colspan="13" class="text-center">
+                No quotation details found.
+              </td>
+            </tr>
+          </ng-template>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeQuotationModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

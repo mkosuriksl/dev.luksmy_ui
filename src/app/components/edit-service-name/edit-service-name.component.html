@@ -1,0 +1,61 @@
+
+<!-- <h1>Edit Service Name</h1>
+<p>Item Data:</p>
+<pre>{{ data.item | json }}</pre>
+
+<button mat-button (click)="onOkClick()">Ok</button> -->
+<!-- edit-service-name.component.html -->
+
+<!-- <h1>Edit Service Name</h1>
+<form>
+  <div class="form-group">
+    <label for="serviceId">Service ID</label>
+    <input type="text" id="serviceId" [(ngModel)]="data.item.service_id" name="serviceId" class="form-control" readonly />
+  </div>
+  <div class="form-group">
+    <label for="serviceName">Service Name</label>
+    <input type="text" id="serviceName" [(ngModel)]="data.item.service_name" name="serviceName" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="serviceSubcategory">Service Subcategory</label>
+    <input type="text" id="serviceSubcategory" [(ngModel)]="data.item.service_subcategory" name="serviceSubcategory" class="form-control" disabled />
+  </div>
+
+  <button mat-button >Update</button>
+  <button mat-button (click)="onOkClick()">Ok</button>
+</form> -->
+
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Edit Service Name</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="addServiceNameForm"
+    (ngSubmit)="updateServiceNameSubmit()">
+      <div class="form-group">
+        <label for="serviceId">Service ID</label>
+        <input type="text" id="serviceId" name="serviceId" class="form-control" readonly formControlName="serviceId"/>
+      </div>
+      <div class="form-group">
+        <label for="addedBy">Added By</label>
+        <input type="text" id="addedBy"  name="addedBy" class="form-control"  formControlName="addedBy"/>
+      </div>
+      <div class="form-group">
+        <label for="serviceName">Service Name</label>
+        <input type="text" id="serviceName" name="serviceName" class="form-control" formControlName="serviceName"/>
+      </div>
+      <div class="form-group">
+        <label for="serviceSubcategory">Service Subcategory</label>
+        <input type="text" id="serviceSubcategory"  name="serviceSubcategory" class="form-control"  formControlName="serviceCategory"/>
+      </div>
+
+      <button mat-button >Update</button>
+      <button mat-button (click)="onOkClick()">Discard</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+
+

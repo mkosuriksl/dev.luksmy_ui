@@ -1,0 +1,127 @@
+body {
+  background-color: #f4f4f4;
+}
+
+.container-fluid {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  top: 40px;
+  position: relative;
+}
+
+.login-form {
+  border-radius: 6px;
+  border: none;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.aucformTitle {
+  background-color: #4caf50;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.scrollable-form {
+  max-height: 70vh; 
+  overflow-y: auto; 
+  padding-right: 10px; 
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #18aedf;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #1294c7;
+}
+.form-scrollable-container {
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+@media (max-width: 768px) {
+  .container-fluid {
+    padding: 10px;
+  }
+
+  .login-form {
+    padding: 15px;
+  }
+
+  .aucformTitle {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .form-control {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .btn-primary {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .scrollable-form {
+    max-height: 60vh; 
+  }
+}
+
+
+@media (max-width: 576px) {
+  .login-form {
+    padding: 10px;
+  }
+
+  .aucformTitle {
+    font-size: 14px;
+    padding: 6px;
+  }
+
+  .form-control {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  .btn-primary {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .scrollable-form {
+    max-height: 50vh;
+  }
+}
+
+@media (min-width: 992px) {
+  .login-form {
+    width: 75%;
+    margin: 0 auto;
+  }
+
+  .container-fluid {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .aucformTitle {
+    font-size: 20px;
+  }
+}

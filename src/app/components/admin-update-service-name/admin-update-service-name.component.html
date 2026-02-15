@@ -1,0 +1,91 @@
+<div class="container mt-4 d-flex justify-content-center">
+  <div class="col-md-7 login-form card">
+    <div class="auctionFormRight" style="margin-top: 0px">
+      <h3 class="aucformTitle text-center">Update Service Name</h3>
+      <form
+        [formGroup]="addServiceNameForm"
+        (ngSubmit)="updateServiceNameSubmit()"
+      >
+        <!-- Service Category Field -->
+
+        <div class="form-group row mb-3">
+          <label
+            for="serviceId"
+            class="col-md-2 control-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif"
+            >Service Category</label
+          >
+          <div class="col-md-10">
+            <input
+              type="text"
+              class="form-control"
+              name="serviceId"
+              placeholder=""
+              required
+              placeholder="Enter Service Id"
+              formControlName="serviceId"
+            />
+          </div>
+        </div>
+
+
+
+        <!-- Assets Sub-Category -->
+        <div class="form-group row mb-3">
+          <label
+            for="SubCategory"
+            class="col-md-2 control-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif"
+            >Sub-Category</label
+          >
+          <div class="col-md-10">
+            <input
+              type="text"
+              class="form-control"
+              name="subCategory"
+              placeholder="Enter Sub-Category"
+              required
+              formControlName="subCategory"
+            />
+          </div>
+        </div>
+
+        <!-- Service Name -->
+        <div class="form-group row mb-3">
+          <label
+            for="servicename"
+            class="col-md-2 control-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif"
+            >Service Name</label
+          >
+          <div class="col-md-10">
+            <input
+              type="text"
+              class="form-control"
+              name="serviceName"
+              placeholder="Enter service Name"
+              required
+              formControlName="serviceName"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-10 offset-md-2 d-flex justify-content-center">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="
+              width: 120px;
+              background-color: #18aedf;
+              color: white;
+              font-size: 17px;
+            "
+          >
+            UPDATE
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

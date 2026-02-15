@@ -1,0 +1,85 @@
+<div class="container mt-4">
+  <div class="row">
+      <div class="col-md-7 text-center">
+        <div class="heading mb-md-5 mt-md-5 mb-sm-2 mt-sm-2">
+         All Available services.
+        </div>
+        <div class="services-list">
+          <ul>
+            <li class="mb-md-3 p-md-2">Mechanical</li>
+            <li class="mb-md-3 p-md-2">Electronic</li>
+            <li class="mb-md-3 p-md-2">Electrical</li> 
+            <li class="mb-md-3 p-md-2">Auto</li>
+          </ul>
+        </div>
+      </div>
+      <div class="auctionMainForm card col-md-5 login-form">
+          <h3 class="aucformTitle text-center">SERVICE PERSON LOGIN</h3>
+          <form [formGroup]="formData" (ngSubmit)="loginProcess()">
+            <div class="aucformFieldsBox col-md-12 col-xs-12" style=" padding: 0 0;">
+              <div class="col-md-12 col-sm-12">
+              <label style="width: 100%;font-size: 17px;color: #020202; font-family: sans-serif;" class="mb-2">Email/Mobile<span style="color: red">*</span></label>
+            <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            <input class="form-control" type="text" placeholder="Enter Email Address or Mobile Number" name="email" formControlName="username" required>
+
+              </div>
+              <!-- <div class="text-danger mt-2 text-end" *ngIf="formData.get('username')?.errors &&
+              formData.get('username')?.hasError('email')">
+                 Please enter a valid email.
+            </div> -->
+
+              </div>
+            </div>
+            <div class="aucformFieldsBox col-xs-12 col-xs-12" style=" margin: 13px 0; padding: 0 0;">
+
+              <div class="col-md-12 col-sm-12">
+               <label style="width: 100%;font-size: 17px;color: #020202; font-family: sans-serif;"  class="mb-2">Password<span style="color: red">*</span></label>
+             <div class="input-group">
+             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input class="form-control" style=" border-radius: 0px 4px 4px 0px;"  [type]="passwordFieldType" name="password" placeholder="Enter Password" formControlName="password" required>
+                <div>
+                  <i class="fa"
+                  [ngClass]="{'fa-eye': !isPasswordVisible, 'fa-eye-slash': isPasswordVisible}"
+                  (click)="togglePasswordVisibility()"
+                  style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;"
+                  aria-hidden="true"></i>
+                </div>
+                
+
+               </div>
+               </div>
+             </div>
+
+             <div class="aucformFieldsBox col-xs-12 col-md-4">
+              <a style="color: #18aedf; text-decoration: underline;" routerLink="/sp-verify-otp">Verify your account</a>
+             </div>
+
+             <div class="aucformFieldsBox col-md-12 col-xs-12">
+              <div class="col-md-12 col-xs-12 text-center">
+              <br>
+            <input class="btn btn-success" type="submit" value="LOG IN" [disabled]="!formData.valid"  style="width: 100px;">
+              </div>
+
+            </div>
+
+
+              <div  class="aucformFieldsBox col-xs-12 col-md-4 mb-2" >
+                <a style="color: #18aedf; text-decoration: underline;" routerLink="/sp-forgot-password">Forgot Password</a>
+              </div>
+              <div class="aucformFieldsBox  col-md-8 col-xs-12">
+
+                <span style="font-size: 14px;">New user?
+                      &nbsp;
+                <a style="color: #18aedf;" routerLink="/sp-register"><u>Register here</u></a></span>
+                <br><br>
+              </div>
+              <!-- <button class="btn btn-primary"  type="submit">Submit</button> -->
+          </form>
+
+      </div>
+  </div>
+</div>
+
+
+

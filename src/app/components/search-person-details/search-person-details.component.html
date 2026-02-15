@@ -1,0 +1,27 @@
+
+<div class="container mt-4" *ngIf="searchResults.length > 0">
+  <h4 class="services-heading p-2 custom-bg">Search Results for {{ category }}</h4>
+  <div class="row">
+    <div class="col-md-3" *ngFor="let person of searchResults">
+      <div class="card profile-card-3 custom-card-height">
+        <div class="background-block">
+          <img src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="profile-sample1" class="background"/>
+        </div>
+        <div class="profile-thumb-block">
+          <img src="../../../assets/images/dummy profile.jpg" alt="Profile Pic" class="profile"/>
+        </div>
+        <div class="card-content">
+          <h2>{{ person.NAME }}<small>Service Person</small></h2>
+          <div class="desc contact-info">Contact: {{ person.CONTACT_NO }}</div>
+          <div class="desc experience-info">Experience: {{ person.EXPERIENCE }} years</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-4" *ngIf="searchResults.length === 0">
+  <h4 class="services-heading p-2 custom-bg">No Search Results for {{ category }}</h4>
+  <!-- You can add additional content or messages here -->
+</div>
+
+

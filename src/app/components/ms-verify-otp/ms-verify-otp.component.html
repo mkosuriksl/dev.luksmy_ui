@@ -1,0 +1,97 @@
+<div class="container mt-4">
+    <div class="row g-4 mt-5">
+
+        <div class="col-lg-5 col-md-6 col-12">
+            <img src="assets/images/bu.png" class="img-fluid mb-3" alt="Your Image">
+
+            <div class="res3">
+                <ul class="sellCarInfolist dotted-list list-unstyled">
+                    <li class="mb-3">
+                        <div>
+                            <h4>Genuine Buyers</h4>
+                            <p>We let the buyers get in touch with you directly</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <h5 class="fw-bold">
+                                We undertake Annual Maintenance of Apartments, Commercial Buildings and Appliances
+                            </h5>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-7 col-md-6 col-12">
+            <div class="card p-4 login-form shadow">
+                <h3 class="aucformTitle text-center mb-4">Please verify your Email and Mobile Number</h3>
+
+                <form [formGroup]="verifyForm" (ngSubmit)="verifySubmit()">
+
+                    <div class="row g-2 align-items-center mb-3">
+                        <label for="mobileNo" class="col-12 col-sm-3 col-form-label fw-semibold">
+                            Mobile <span class="text-danger">*</span>
+                        </label>
+
+                        <div class="col-12 col-sm-9">
+                            <div class="row g-2">
+                                <div class="col-12 col-sm-6">
+                                    <input type="text" class="form-control" name="mobileNo"
+                                        placeholder="Enter Your Mobile No" pattern="[1-9]{1}[0-9]{9}" maxlength="10"
+                                        title="Enter 10-digit mobile number" formControlName="mobile" required>
+                                </div>
+                                <div class="col-12 col-sm-auto">
+                                    <button type="button" class="btn btn-warning w-100" (click)="sendMobileOTP()">Send
+                                        OTP</button>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <input type="text" class="form-control" name="enterOTP" placeholder="Enter OTP"
+                                        formControlName="enterMobileOTP">
+                                </div>
+                                <div class="col-12 col-sm-auto">
+                                    <button type="button" class="btn btn-success w-100"
+                                        (click)="verifyMobileOTP()">Verify</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-2 align-items-center mb-3">
+                        <label for="emailId" class="col-12 col-sm-3 col-form-label fw-semibold">
+                            Email ID <span class="text-danger">*</span>
+                        </label>
+
+                        <div class="col-12 col-sm-9">
+                            <div class="row g-2">
+                                <div class="col-12 col-sm-6">
+                                    <input type="email" class="form-control" name="emailId"
+                                        placeholder="Enter Your Email" formControlName="email" required>
+                                </div>
+                                <div class="col-12 col-sm-auto">
+                                    <button type="button" class="btn btn-warning w-100" (click)="sendEmailOTP()">Send
+                                        OTP</button>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <input type="text" class="form-control" name="enterOTP" placeholder="Enter OTP"
+                                        formControlName="enterEmailOTP">
+                                </div>
+                                <div class="col-12 col-sm-auto">
+                                    <button type="button" class="btn btn-success w-100"
+                                        (click)="verifyEmailOTP()">Verify</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary px-4" style="background-color:#18aedf"
+                            [disabled]="!isLoginEnabled()">
+                            Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

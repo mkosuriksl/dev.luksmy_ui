@@ -1,0 +1,15 @@
+.filter-toggle-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.filter-toggle-icon:hover {
+  color: #d1ecf1;
+  transform: rotate(90deg);
+}
+
+.card-body {
+  transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}

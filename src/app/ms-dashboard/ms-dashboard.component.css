@@ -1,0 +1,35 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+/* Sidebar default (Desktop ≥1200px) */
+.sidebar {
+  width: 240px;
+  background: #fff;
+  border-right: 1px solid #ddd;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  background: #f8f9fa;
+}
+
+/* Tablet + Mobile (<1200px) */
+@media (max-width: 1199.98px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: translateX(-100%);
+    z-index: 1050;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}

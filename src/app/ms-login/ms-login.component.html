@@ -1,0 +1,96 @@
+<div class="container mt-5">
+  <div class="row g-4">
+    <div class="col-lg-7 text-center">
+      <h2 class="text-info fw-bold mb-4 text-shadow">All Available Services</h2>
+      <ul class="list-unstyled fs-4 fw-semibold">
+        <li class="mb-3 service-item">Civil Engineering</li>
+        <li class="mb-3 service-item">Land Work</li>
+        <li class="mb-3 service-item">Plumber</li>
+        <li class="mb-3 service-item">Painter</li>
+      </ul>
+    </div>
+    <div class="col-lg-5 col-md-12">
+      <div class="card p-4 border rounded-3 shadow-sm">
+        <h3 class="bg-success text-white text-center py-2 rounded mb-4">
+          MATERIAL SUPPLIER LOGIN
+        </h3>
+        <form [formGroup]="formData" (ngSubmit)="loginProcess()">
+          <div class="mb-3">
+            <label for="username" class="form-label">
+              Email/Mobile <span class="text-danger">*</span>
+            </label>
+            <div class="input-group">
+              <span class="input-group-text bg-primary text-white">
+                <i class="fa fa-user"></i>
+              </span>
+              <input
+                id="username"
+                class="form-control"
+                type="text"
+                formControlName="username"
+                placeholder="Enter Email or Mobile"
+                required
+                aria-label="Email or Mobile"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">
+              Password <span class="text-danger">*</span>
+            </label>
+            <div class="input-group position-relative">
+              <span class="input-group-text bg-primary text-white">
+                <i class="fa fa-lock"></i>
+              </span>
+              <input
+                id="password"
+                class="form-control"
+                [type]="isPasswordVisible ? 'text' : 'password'"
+                formControlName="password"
+                placeholder="Enter Password"
+                required
+              />
+              <i
+                class="fa position-absolute"
+                [ngClass]="{
+                  'fa-eye': !isPasswordVisible,
+                  'fa-eye-slash': isPasswordVisible
+                }"
+                (click)="togglePasswordVisibility()"
+                style="
+                  top: 50%;
+                  right: 10px;
+                  transform: translateY(-50%);
+                  cursor: pointer;
+                "
+              ></i>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between flex-wrap mb-3 small">
+            <a routerLink="/ms-verify-otp" class="text-primary"
+              >Verify your account</a
+            >
+            <a routerLink="/sp-forgot-password" class="text-primary"
+              >Forgot Password?</a
+            >
+          </div>
+          <div class="text-center mb-3">
+            <button
+              type="submit"
+              class="btn btn-success w-50"
+              [disabled]="!formData.valid"
+            >
+              LOG IN
+            </button>
+          </div>
+          <div class="text-center small">
+            New user?
+            <a routerLink="/ms-register" class="text-primary"
+              ><u>Register here</u></a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

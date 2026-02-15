@@ -1,0 +1,136 @@
+<div class="container mt-4 d-flex justify-content-center">
+  <div class="col-md-7 login-form card">
+    <div class="auctionFormRight scrollable-form" style="margin-top: 0px;">
+      <h3 class="aucformTitle text-center">Update Assets For Your Home Services</h3>
+      <form [formGroup]="editAssetsForm" (ngSubmit)="editAssetsSubmit()">
+
+        <!-- Assets Category -->
+        <div class="form-group row mb-3">
+          <label for="assetsCategory" class="col-md-4 col-form-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif;">Assets Category</label>
+          <div class="col-md-8">
+            <input class="form-control" name="assetsCategory" placeholder="Enter Your assetsCategory" readonly
+              formControlName="assetCat">
+          </div>
+        </div>
+
+        <!-- Assets Sub-Category -->
+        <div class="form-group row mb-3">
+          <label for="assetsSubCategory" class="col-md-4 col-form-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif;">Assets Sub-Category</label>
+          <div class="col-md-8">
+            <select id="assetSubCat" class="form-control" placeholder="select assetssubCategory"
+              formControlName="assetSubCat">
+              <option value="" disabled selected>Select Asset SubCategory</option>
+              <option *ngFor="let assetSubCat of assetSubCats" [value]="assetSubCat">{{ assetSubCat }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row mb-3">
+          <label for="assetBrand" class="col-md-4 col-form-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif;">Asset Brand</label>
+          <div class="col-md-8">
+            <select id="assetBrand" class="form-control" placeholder="select  assetBrand" required
+              formControlName="assetBrand">
+              <option value="" disabled selected>Select Asset Brand</option>
+              <option *ngFor="let assetBrand of assetBrands" [value]="assetBrand">{{ assetBrand }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row mb-3">
+          <label for="assetModel" class="col-md-4 col-form-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif;">Asset Model</label>
+          <div class="col-md-8">
+            <select id="assetModel" class="form-control" placeholder="select assetModel" required
+              formControlName="assetModel">
+              <option value="" disabled selected>Select Asset Model</option>
+              <option *ngFor="let assetModel of assetModels" [value]="assetModel">{{ assetModel }}</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Location Field -->
+        <div class="form-group row mb-3">
+          <label for="city" class="col-md-4 col-form-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif;">Location</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="location" placeholder="Enter Your Location" required
+              formControlName="location" #placesRef="ngx-places" ngx-gp-autocomplete [options]='options'
+              (onAddressChange)="handleAddressChange($event)">
+          </div>
+        </div>
+
+        <!-- Street Field -->
+        <div class="form-group row mb-3">
+          <label for="state" class="col-md-4 col-form-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif;">Street</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="state" placeholder="Enter Your Street" required
+              formControlName="street">
+          </div>
+        </div>
+
+        <!-- Door No Field -->
+        <div class="form-group row mb-3">
+          <label for="district" class="col-md-4 col-form-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif;">Door Number</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="doornumber" placeholder="Enter Your Door Number" required
+              formControlName="doorNo">
+          </div>
+        </div>
+
+        <!-- Town field-->
+        <div class="form-group row mb-3">
+          <label for="district" class="col-md-4 col-form-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif;">Town</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="town" placeholder="Enter Your Town" required
+              formControlName="town">
+          </div>
+        </div>
+
+        <!-- District field -->
+        <div class="form-group row mb-3">
+          <label for="district" class="col-md-4 col-form-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif;">District</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="district" placeholder="Enter Your District" required
+              formControlName="district">
+          </div>
+        </div>
+
+        <!-- State field -->
+        <div class="form-group row mb-3">
+          <label for="district" class="col-md-4 col-form-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif;">State</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="state" placeholder="Enter Your State" required
+              formControlName="state">
+          </div>
+        </div>
+
+        <!-- Pincode field -->
+        <div class="form-group row mb-3">
+          <label for="district" class="col-md-4 col-form-label"
+            style="font-size: 17px; color: #020202; font-family: sans-serif;">Pincode</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="pincode" placeholder="Enter Your Pincode" required
+              formControlName="pinCode">
+          </div>
+        </div>
+
+        <div class="col-md-10 offset-md-2 d-flex justify-content-center" style="gap: 20px;">
+          <button type="submit" class="btn btn-primary"
+            style="width: 120px; background-color: #18aedf; color: white; font-size: 17px;">Update</button>
+          <button type="cancel" class="btn btn-danger"
+            style="width: 120px; background-color: red; color: white; font-size: 17px;"
+            (click)=" backk()">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

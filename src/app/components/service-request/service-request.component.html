@@ -1,0 +1,163 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-5 col-md-6">
+      <div class="container min-height-contiainer">
+        <div class="card shadow-lg p-1 bg-white rounded">
+          <div class="card-header custom-bg">
+            <div class="align-items-center">
+              <div class="btn btn-link mr-3" style="color: #fff">
+                <div>
+                  <i class="fa fa-database" style="font-size: 36px"></i>
+                </div>
+                Service Request
+              </div>
+            </div>
+          </div>
+
+          <div id="form1" class="p-3">
+            <div id="form1">
+              <form [formGroup]="submitForm" (ngSubmit)="onSubmitRequestForm()">
+                <div class="form-group row">
+                  <div class="form-group">
+                    <label for="description" class="my-2">Service Category</label>
+                    
+                    <select
+                    class="form-control"
+                    id="serviceName"
+                    formControlName="serviceName"
+                  >
+                    <option value="" disabled>Select Service Category</option>
+                    <option>CIVIL
+                     
+                    </option>
+                  </select>
+                  </div>
+                  
+                </div>
+                <div class="col-md-12">
+                  <label for="serviceType" class="my-2">Service Sub Category</label>
+                  
+                  <select
+                   (change)="onSelectionChange($event)"
+            class="form-control"
+            id="servicetype"
+            formControlName="servicetype"
+          >
+          <option value="" disabled>Service Sub Category</option>
+            <option
+              *ngFor="let category of serviceType"
+              [value]="category"
+            >
+              {{ category }}
+            </option>
+          </select>
+                </div>
+                <div class="col-md-12">
+                  <label for="location" class="my-2">Asset ID's</label>
+                  <select
+                    class="form-control"
+                    id="serviceType"
+                    formControlName="assetid"
+                  >
+                    <option value="" disabled>Select Asset ID</option>
+                    <option
+                      *ngFor="let assetId of assetIds"
+                      [value]="assetId"
+                    >
+                      {{ assetId }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="description" class="my-2">Description</label>
+                  <textarea
+                    class="form-control"
+                    id="description"
+                    rows="3"
+                    formControlName="description"
+                  ></textarea>
+                </div>
+
+                <div class="row mt-2">
+                  <div class="col-md-1"><input
+                    (change)="onCheckboxChange($event)" 
+                      type="checkbox"
+                      class="form-check-input"
+                      name="check_agree"
+                      id="check_agree"
+                      required
+                      value="y"
+                    /></div>
+                 <div  class="col-md-11">
+                  <label class="form-check-label" for="check_agree">
+                    <a
+                      target="_blank"
+                      style="color: #18aedf; font-size: 16px; font-size: small"
+                      >I agree to share Email & Contact number with 3rd party
+                      service providers</a
+                    >
+                  </label>
+                 </div>
+                </div>
+
+                <div class="text-center">
+                  <button
+                    type="submit"
+                    class="btn btn-success mx-auto mt-3"
+                    [disabled]="!isCheck"
+                  >
+                    Submit Request
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 col-md-6" *ngIf="selectedIndex !== -1">
+      <div class="container min-height-container">
+        <div class="card shadow-lg p-1 bg-white rounded">
+          <div class="card-header custom-bg">
+            <div class="align-items-center">
+              <div class="btn btn-link mr-3" style="color: #fff">
+                <div>
+                  <i class="fa fa-database" style="font-size: 36px"></i>
+                </div>
+
+                Assit ID details
+              </div>
+            </div>
+          </div>
+          <div class="card-details" *ngIf="selectedIndex !== -1">
+            <div class="asset-details">
+              <span>Sub-Category:</span
+              >{{ assets[selectedIndex].assetSubCat }}
+            </div>
+            <div class="asset-details">
+              <span>District:</span>{{ assets[selectedIndex].district }}
+            </div>
+            <div class="asset-details">
+              <span>Door-no:</span>{{ assets[selectedIndex].doorNo }}
+            </div>
+            <div class="asset-details">
+              <span>Location:</span>{{ assets[selectedIndex].location }}
+            </div>
+            <div class="asset-details">
+              <span>Pincode:</span>{{ assets[selectedIndex].pinCode }}
+            </div>
+            <div class="asset-details">
+              <span>State:</span>{{ assets[selectedIndex].state }}
+            </div>
+            <div class="asset-details">
+              <span>Street:</span>{{ assets[selectedIndex].street }}
+            </div>
+            <div class="asset-details">
+              <span>Town:</span>{{ assets[selectedIndex].town }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+  }
+  
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    margin-left: -5px;
+  }
+  
+  .form-row > .col,
+  .form-row > [class*="col-"] {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .main-container {
+    background-color: #f0f0f0; /* Set your desired background color here */
+    padding: 20px; /* Optional padding for content inside the container */
+    height: 100%;
+  
+  }
+  
+  .table-hover tbody tr:hover {
+    color: #858796;
+    background-color: rgba(0, 0, 0, 0.075);
+  }
+  
+  table th {
+    color: #fff;
+    background-color: #5a5c69;
+    border-color: #6c6e7e;
+  }
+  table {
+    border-radius: 5%;
+    }
+  
+    .border-left-primary {
+      border-left: 0.25rem solid #4e73df !important;
+    }
+    .border-right-primary {
+      border-right: 0.25rem solid #4e73df !important;
+    }
+    .serv_req_box{
+      width: 100%;
+      display: flex;
+      flex-flow: wrap;
+      justify-content: space-between;
+    }
+    .card-container {
+      height: 45%;
+    }
+    .table-container {
+      max-height: calc(100vh - 220px); /* Adjust based on the height of other elements */
+      overflow-y: auto;
+      border: 1px solid #ddd;
+    }
+  
+    .pagination::ng-deep .ngx-pagination .current {
+      background: brown;
+    }
+  
+  

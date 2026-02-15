@@ -1,0 +1,101 @@
+<mat-drawer-container class="example-container mat-typography">
+  <mat-drawer #drawer mode="side" disableClose="true" [opened]="true" style="margin-top: 1rem;">
+    <button mat-mini-fab (click)="isExpanded = !isExpanded" color="warn" style="margin: 10px;">
+      <mat-icon aria-label="Menu">menu</mat-icon>
+    </button>
+
+    <mat-nav-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon routerLink="/sp-dashboard/sp-profile">person</mat-icon>
+        <span mat-line *ngIf="isExpanded" routerLink="/sp-dashboard/sp-profile" class="menu-text">My Profile</span>
+      </mat-list-item>
+
+      <mat-expansion-panel [expanded]="isExpanded" (opened)="serviceExpanded = true" (closed)="serviceExpanded = false">
+        <mat-expansion-panel-header>
+          <mat-icon>build</mat-icon>
+          <span class="mx-2" *ngIf="isExpanded">
+            <h3>Service Management</h3>
+          </span>
+        </mat-expansion-panel-header>
+
+        <mat-list-item>
+          <mat-icon mat-list-icon routerLink="/sp-dashboard/sp-add-service">add</mat-icon>
+          <span mat-line *ngIf="isExpanded" routerLink="/sp-dashboard/sp-add-service" class="menu-text">Add
+            Service</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <mat-icon routerLink="/sp-dashboard/sp-showmy-services">list</mat-icon>
+          <span mat-line *ngIf="isExpanded" routerLink="/sp-dashboard/sp-showmy-services" class="menu-text">Show My
+            Services</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <mat-icon routerLink="/sp-dashboard/sp-service-request">help</mat-icon>
+          <span mat-line *ngIf="isExpanded" routerLink="/sp-dashboard/sp-service-request" class="menu-text">Show Service
+            Request</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <mat-icon routerLink="add-service-charges">add_circle</mat-icon>
+          <span mat-line *ngIf="isExpanded" routerLink="add-service-charges" class="menu-text">Add Service Charge</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <mat-icon routerLink="show-service-charge">monetization_on</mat-icon>
+          <span mat-line *ngIf="isExpanded" routerLink="show-service-charge" class="menu-text">Show Service
+            Charge</span>
+        </mat-list-item>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="isExpanded" (opened)="rentalExpanded = true" (closed)="rentalExpanded = false">
+        <mat-expansion-panel-header>
+          <mat-icon>home</mat-icon>
+          <span class="mx-2" *ngIf="isExpanded">
+            <h3>Rental Management</h3>
+          </span>
+        </mat-expansion-panel-header>
+
+        <mat-list-item>
+          <mat-icon color="primary" routerLink="/sp-dashboard/add-assets">add_circle</mat-icon>
+          <span mat-line *ngIf="isExpanded" routerLink="/sp-dashboard/add-assets" class="menu-text">Add Machine</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <mat-icon color="primary" routerLink="/sp-dashboard/edit-assets">android</mat-icon>
+          <span mat-line *ngIf="isExpanded" routerLink="/sp-dashboard/edit-assets" class="menu-text">Show Machine</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <mat-icon color="primary" routerLink="/sp-dashboard/show-rental">home</mat-icon>
+          <span mat-line *ngIf="isExpanded" routerLink="/sp-dashboard/show-rental" class="menu-text">Show Rental</span>
+        </mat-list-item>
+      </mat-expansion-panel>
+
+      <mat-list-item>
+        <mat-icon routerLink="/sp-dashboard/sp-reset-password">vpn_key</mat-icon>
+        <span mat-line *ngIf="isExpanded" routerLink="/sp-dashboard/sp-reset-password" color="primary"
+          class="menu-text">Update Password</span>
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-icon routerLink="/sp-dashboard/sp-update-availability">location_on</mat-icon>
+        <span mat-line *ngIf="isExpanded" routerLink="/sp-dashboard/sp-update-availability" color="primary"
+          class="menu-text">Update Availability</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon routerLink="/sp-dashboard/delete-account">delete</mat-icon>
+        <span mat-line *ngIf="isExpanded" routerLink="/sp-dashboard/delete-account" color="primary" class="menu-text"
+          (click)="openPopup()">
+          Delete Account
+        </span>
+      </mat-list-item>
+
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content [ngClass]="isExpanded ? 'content-expanded' : 'content-collapsed'">
+    <div class="example-sidenav-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

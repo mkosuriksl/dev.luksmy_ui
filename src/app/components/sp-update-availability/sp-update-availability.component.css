@@ -1,0 +1,133 @@
+
+
+body {
+  font-family:'Times New Roman', Times, serif
+}
+
+.form-container {
+  border: 2px solid #ddd;
+  width: 600px;
+  max-width: 600px;
+  margin: 0 auto; /* Center the form horizontally */
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+
+  align-items: center;
+
+}
+
+.form-check-input {
+  background-color: #d7c4c4;
+}
+
+/* Style for checked radio buttons */
+.form-check-input:checked {
+  background-color: #555;
+}
+
+
+.form-group label {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:medium;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+
+}
+
+.btn-primary {
+  background-color: #007BFF;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+input[type="checkbox"] {
+  margin-top: 8px;
+}
+
+.aucformTitle {
+  background-color: #4caf50;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.form-container{
+  position: relative;
+  top:50px;
+}
+@media (max-width: 768px) {
+  .form-container {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .btn-primary {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .form-control {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  .aucformTitle {
+    font-size: 18px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-container {
+    padding: 15px;
+    width: 100%;
+  }
+
+  .btn-primary {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .form-control {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .aucformTitle {
+    font-size: 16px;
+    padding: 6px;
+  }
+}
