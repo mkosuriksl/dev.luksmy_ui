@@ -1,6 +1,12 @@
 @import "~ag-grid-community/styles/ag-grid.css";
 @import "~ag-grid-community/styles/ag-theme-alpine.css";
 
+:root {
+  --primary-color: #C6A052; /* gold tone */
+  --primary-hover: #E6C162; /* lighter gold for hover states */
+  --primary-dark: #9B7A3A; /* darker gold for accents */
+}
+
 html,
 body {
   height: 100%;
@@ -17,7 +23,7 @@ body {
 }
 
 .app-header {
-  background: #0d6efd;
+  background: var(--primary-color);
   color: #fff;
   padding: 0.75rem 1rem;
 }
@@ -38,7 +44,7 @@ body {
   font-size: 0.9rem;
 }
 .active-menu {
-  background-color: #007bff !important;
+  background-color: var(--primary-color) !important;
   color: #fff !important;
   border-radius: 4px;
 }

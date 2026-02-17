@@ -1,5 +1,11 @@
 
 
+:root {
+  --primary-color: #C6A052; /* gold tone */
+  --primary-hover: #E6C162; /* lighter gold for hover states */
+  --primary-dark: #9B7A3A; /* darker gold for accents */
+}
+
 .line-1{
   position: relative;
   top: 50%;
@@ -24,13 +30,13 @@
 } */
 
 .bg-skyblue {
-  background-color: skyblue;
+  background-color: var(--primary-color);
   color: white; /* Set the text color to white */
   font-weight: bold; /* Make the text bold */
 }
 .services-heading {
   text-align: center;
-  background-color: #a3d1f6;
+  background-color: var(--primary-color);
   /* height: 37px; */
   margin: 0px 28px 0px 10px;
   border: 1px solid #fff;
@@ -101,19 +107,19 @@ ul {
 
 }
 .card:hover {
-  box-shadow: 0 0 20px rgba(24, 174, 223, 0.6);
+  box-shadow: 0 0 20px rgba(198, 160, 82, 0.6);
   transition: box-shadow 0.3s;
 }
 
 .card-no-border:hover {
-  border: 1px solid #18aedf;
+  border: 1px solid var(--primary-color);
   cursor: pointer;
 }
 .justify-text {
   text-align: justify;
 }
 .custom-bg {
-  background-color: #18aedf;
+  background-color: var(--primary-color);
 }
 
 .single-place-image:hover {
@@ -296,11 +302,11 @@ marquee {
 }
 
 .form-inline .fa-search {
-  color: #007bff;
+  color: var(--primary-color);
 }
 
 .form-inline .fa-search:hover {
-  color: #0056b3;
+  color: var(--primary-hover);
   transition: color 0.3s;
 }
 
@@ -309,8 +315,8 @@ marquee {
   animation-fill-mode: forwards;
 }
 .search-bar {
-  background-color: #0033a0; /* Blue background color */
-  border: 2px solid #008000; /* Green border */
+  background-color: var(--primary-color); /* Gold background color */
+  border: 2px solid var(--primary-dark); /* Darker gold border */
   padding: 10px;
   border-radius: 4px;
   display: flex;
@@ -325,15 +331,24 @@ marquee {
   padding: 5px 10px;
   border-radius: 4px;
   width: 52%; /* Set to 40% width */
+  background-color: #fff;
 }
 
 .search-bar button {
-  background-color: #008000; /* Green background for button */
-  border: none;
+  background-color: var(--primary-color); /* Gold background for button */
+  border: 2px solid var(--primary-dark);
   outline: none;
   padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: var(--primary-hover); /* Lighter gold on hover */
+  border-color: var(--primary-color);
 }
 .search-bar select {
   width: 60%; /* Set to 40% width */
@@ -350,7 +365,7 @@ marquee {
 }
 
 .text-primary {
-  color: #007bff;
+  color: var(--primary-color);
 }
 .header{
   position: fixed;
